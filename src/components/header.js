@@ -17,6 +17,8 @@ let TodaysDate = styled.h2`
   font-style: serif;
 `
 
+let Confetti = styled.canvas``
+
 let d = new Date()
 let dd = d.getDate()
 let mm = d.getMonth() + 1
@@ -36,6 +38,7 @@ export default class header extends Component {
     return (
       <HeaderOuter>
         <HeaderInner>
+          {dd === 14 && mm === 11 && <Confetti id="birthday" />}
           {dd === 19 && mm === 11 ? (
             <TodaysDate>Today's my birthday!</TodaysDate>
           ) : (
