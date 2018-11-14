@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import 'confetti-js'
 
 import styled from 'styled-components'
 
@@ -34,11 +35,31 @@ weekday[6] = 'Saturday'
 let today = weekday[d.getDay()]
 
 export default class header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      confetti: null,
+    }
+  }
+
+  handleBirthdayFun = () => {
+    this.setState({ confetti: true })
+  }
+
+  componentDidMount = () => {
+    if (dd === 19 && mm === 11) {
+      let confettiSettings = { target: 'birthday' }
+      let confetti = new window.ConfettiGenerator(confettiSettings)
+      confetti.render()
+      this.handleBirthdayFun()
+    }
+  }
   render() {
     return (
       <HeaderOuter>
         <HeaderInner>
-          {dd === 14 && mm === 11 && <Confetti id="birthday" />}
+          {dd === 19 && mm === 11 && <Confetti id="birthday" />}
           {dd === 19 && mm === 11 ? (
             <TodaysDate>Today's my birthday!</TodaysDate>
           ) : (
