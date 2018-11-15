@@ -98,7 +98,7 @@ export default class header extends Component {
   }
 
   componentDidMount = () => {
-    if (dd === 15 && mm === 11) {
+    if (dd === 19 && mm === 11) {
       this.handleBirthdayFun()
     }
   }
