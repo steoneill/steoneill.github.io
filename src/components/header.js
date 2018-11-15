@@ -1,24 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import 'confetti-js'
 
 import styled from 'styled-components'
-
-let HeaderOuter = styled.header`
-  width: 100%;
-  height: 80vh;
-`
-
-let HeaderInner = styled.div`
-  max-width: 1000px;
-  width: 100%;
-  margin: auto;
-`
-
-let TodaysDate = styled.h2`
-  font-style: serif;
-`
-
-let Confetti = styled.canvas``
 
 let d = new Date()
 let dd = d.getDate()
@@ -34,44 +17,118 @@ weekday[6] = 'Saturday'
 
 let today = weekday[d.getDay()]
 
+let HeaderOuter = styled.header`
+  width: 100%;
+  height: 80vh;
+  display: flex;
+`
+
+let HeaderInner = styled.div`
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+`
+
+let HeaderLeft = styled.div``
+
+let TodaysDate = styled.h2`
+  font-style: ${props => props.theme.primaryFont};
+`
+
+let Greeting = styled.h1`
+  font-size: 40px;
+  color: ${props => props.theme.primary};
+`
+
+let HeaderCopy = styled.p`
+  font-size: 16px;
+  font-family: ${props => props.theme.secondaryFont};
+  width: 50%;
+  margin-bottom: 30px;
+`
+
+let CTA = styled.a`
+  background: ${props => props.theme.primary};
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+`
+
+let Confetti = styled.canvas`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100px;
+    background: red;
+  }
+`
+
 export default class header extends Component {
   constructor(props) {
     super(props)
 
+    this.todaysCopy = this.todaysCopy.bind(this)
+
     this.state = {
       confetti: null,
+      birthday: false,
     }
   }
-
+  //Turns on confetti
   handleBirthdayFun = () => {
-    this.setState({ confetti: true })
+    console.log('yooo its my birthday ')
+    this.setState({
+      birthday: true,
+      confetti: true,
+    })
+    setTimeout(() => {
+      let confettiSettings = {
+        target: 'birthday',
+        max: '300',
+        clock: '10',
+        rotate: true,
+      }
+      let confetti = new window.ConfettiGenerator(confettiSettings)
+      confetti.render()
+    }, 200)
   }
 
   componentDidMount = () => {
-    if (dd === 19 && mm === 11) {
-      let confettiSettings = { target: 'birthday' }
-      let confetti = new window.ConfettiGenerator(confettiSettings)
-      confetti.render()
+    if (dd === 15 && mm === 11) {
       this.handleBirthdayFun()
     }
   }
+
+  todaysCopy() {
+    if (this.state.birthday) {
+      return `Today's my birthday!`
+    } else if (today === 'Friday') {
+      return `Thank god it's Friday!`
+    } else {
+      return `Happy ${today}!`
+    }
+  }
+
   render() {
     return (
       <HeaderOuter>
+        {this.state.birthday && <Confetti id="birthday" />}
         <HeaderInner>
-          {dd === 19 && mm === 11 && <Confetti id="birthday" />}
-          {dd === 19 && mm === 11 ? (
-            <TodaysDate>Today's my birthday!</TodaysDate>
-          ) : (
-            <Fragment>
-              {today === 'Friday' ? (
-                <TodaysDate>Thank god it's</TodaysDate>
-              ) : (
-                <TodaysDate>Happy</TodaysDate>
-              )}
-              <TodaysDate>{today}</TodaysDate>
-            </Fragment>
-          )}
+          <HeaderLeft>
+            <TodaysDate>{this.todaysCopy()}</TodaysDate>
+            <Greeting>My name's Ste!</Greeting>
+            <HeaderCopy>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero at
+              laudantium dignissimos ducimus nihil consectetur autem pariatur
+              exercitationem natus repellat. Incidunt blanditiis qui alias
+              voluptatibus consectetur eos doloremque ex aut!
+            </HeaderCopy>
+            <CTA>Get in touch</CTA>
+          </HeaderLeft>
         </HeaderInner>
       </HeaderOuter>
     )
