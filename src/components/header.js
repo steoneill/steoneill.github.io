@@ -5,7 +5,6 @@ import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 import styled from 'styled-components'
-
 let d = new Date()
 let dd = d.getDate()
 let mm = d.getMonth() + 1

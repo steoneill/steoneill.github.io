@@ -3,12 +3,14 @@ import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import Image from '../components/image'
+import Menu from '../components/menu'
 
 const IndexPage = () => (
   <Layout>
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
+    <Menu />
     <div>
       <Image />
     </div>
