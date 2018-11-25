@@ -85,23 +85,29 @@ export default class header extends Component {
       birthday: false,
     }
   }
+  //Turns on confetti
+  handleBirthdayFun = () => {
+    this.setState({
+      birthday: true,
+      confetti: true,
+    })
+    setTimeout(() => {
+      let confettiSettings = {
+        target: 'birthday',
+        max: '300',
+        clock: '10',
+        rotate: true,
+      }
+      let confetti = new window.ConfettiGenerator(confettiSettings)
+      confetti.render()
+    }, 200)
+  }
 
   componentDidMount = () => {
-    if (dd === 19 && mm === 11) {
-      this.setState({
-        birthday: true,
-        confetti: true,
-      })
-      setTimeout(() => {
-        let confettiSettings = {
-          target: 'birthday',
-          max: '300',
-          clock: '10',
-          rotate: true,
-        }
-        let confetti = new window.ConfettiGenerator(confettiSettings)
-        confetti.render()
-      }, 200)
+    if (window != undefined) {
+      if (dd === 19 && mm === 11) {
+        this.handleBirthdayFun()
+      }
     }
   }
 
