@@ -1,19 +1,32 @@
-require('dotenv').config()
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+console.log(process.env.NODE_ENV)
 
 module.exports = {
   siteMetadata: {
     title: `Ste O'Neill | Full Stack Web Developer`,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        spaceId: `${process.env.CONTENTFUL_SPACE_ID}`,
         // Learn about environment variables: https://gatsby.app/env-vars
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        accessToken: `${process.env.CONTENTFUL_PREVIEW_TOKEN}`,
+        host: `preview.contentful.com`,
       },
     },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `${process.env.CONTENTFUL_SPACE_ID}`,
+        // Learn about environment variables: https://gatsby.app/env-vars
+        accessToken: `${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+    },
+    'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
