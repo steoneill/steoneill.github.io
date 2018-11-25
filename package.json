@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "confetti-js": "^0.0.14",
+    "confetti-js": "0.0.14",
     "contentful": "^7.0.5",
     "dotenv": "^6.1.0",
     "gatsby": "^2.0.19",
