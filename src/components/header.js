@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import 'confetti-js'
 
+import { StaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
+
 import styled from 'styled-components'
 
 let d = new Date()
@@ -27,9 +30,13 @@ let HeaderInner = styled.div`
   max-width: 1000px;
   width: 100%;
   margin: auto;
+
+  display: flex;
 `
 
 let HeaderLeft = styled.div``
+
+let HeaderRight = styled.div``
 
 let TodaysDate = styled.h2`
   font-style: ${props => props.theme.primaryFont};
@@ -80,7 +87,6 @@ export default class header extends Component {
   }
   //Turns on confetti
   handleBirthdayFun = () => {
-    console.log('yooo its my birthday ')
     this.setState({
       birthday: true,
       confetti: true,
@@ -115,22 +121,38 @@ export default class header extends Component {
 
   render() {
     return (
-      <HeaderOuter>
-        {this.state.birthday && <Confetti id="birthday" />}
-        <HeaderInner>
-          <HeaderLeft>
-            <TodaysDate>{this.todaysCopy()}</TodaysDate>
-            <Greeting>My name's Ste!</Greeting>
-            <HeaderCopy>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero at
-              laudantium dignissimos ducimus nihil consectetur autem pariatur
-              exercitationem natus repellat. Incidunt blanditiis qui alias
-              voluptatibus consectetur eos doloremque ex aut!
-            </HeaderCopy>
-            <CTA>Get in touch</CTA>
-          </HeaderLeft>
-        </HeaderInner>
-      </HeaderOuter>
+      <StaticQuery
+        query={graphql`
+          query {
+            headerImage: file(relativePath: { eq: "hero_photo.jpg" }) {
+              childImageSharp {
+                fluid(maxWidth: 2000) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+        `}
+        render={data => (
+          <HeaderOuter>
+            {this.state.birthday && <Confetti id="birthday" />}
+            <HeaderInner>
+              <HeaderLeft>
+                <TodaysDate>{this.todaysCopy()}</TodaysDate>
+                <Greeting>My name's Ste!</Greeting>
+                <HeaderCopy>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero
+                  at laudantium dignissimos ducimus nihil consectetur autem
+                  pariatur exercitationem natus repellat. Incidunt blanditiis
+                  qui alias voluptatibus consectetur eos doloremque ex aut!
+                </HeaderCopy>
+                <CTA>Get in touch</CTA>
+              </HeaderLeft>
+              <Img fluid={data.headerImage.childImageSharp.fluid} />
+            </HeaderInner>
+          </HeaderOuter>
+        )}
+      />
     )
   }
 }

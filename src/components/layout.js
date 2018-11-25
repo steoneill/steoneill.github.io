@@ -10,6 +10,7 @@ import Header from './header'
 let Theme = {
   primary: '#F6207C',
   black: '#333333',
+  maxWidth: '1200px',
   primaryFont: `'Montserrat', sans-serif`,
   secondaryFont: `'Playfair Display', serif`,
 }
