@@ -108,23 +108,40 @@ export default class header extends Component {
                 }
               }
             }
+            allContentfulHeader {
+              edges {
+                node {
+                  boldText
+                  availableForWork
+                  headerCopy {
+                    content {
+                      content {
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         `}
         render={data => (
           <HeaderOuter>
             <HeaderInner>
               <HeaderLeft>
+                {console.log(data)}
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
-                <Greeting>My name's Ste!</Greeting>
+                <Greeting>
+                  {data.allContentfulHeader.edges[0].node.boldText}
+                </Greeting>
                 <HeaderCopy>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero
-                  at laudantium dignissimos ducimus nihil consectetur autem
-                  pariatur exercitationem natus repellat. Incidunt blanditiis
-                  qui alias voluptatibus consectetur eos doloremque ex aut!
+                  {
+                    data.allContentfulHeader.edges[0].node.headerCopy.content[0]
+                      .content[0].value
+                  }
                 </HeaderCopy>
                 <CTA>Get in touch</CTA>
               </HeaderLeft>
-              <Img fluid={data.headerImage.childImageSharp.fluid} />
             </HeaderInner>
           </HeaderOuter>
         )}
