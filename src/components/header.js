@@ -86,7 +86,8 @@ export default class header extends Component {
   }
 
   componentDidMount = () => {
-    if (window != undefined) {
+    if (typeof window != undefined) {
+      this.setState = { confetti: true, birthday: true }
       if (dd === 19 && mm === 11) {
         this.setState({
           birthday: true,
@@ -95,9 +96,16 @@ export default class header extends Component {
         setTimeout(() => {
           let confettiSettings = {
             target: 'birthday',
-            max: '300',
-            clock: '10',
-            rotate: true,
+            max: 30,
+            animate: true,
+            props: ['circle'],
+            colors: [
+              [165, 104, 246],
+              [230, 61, 135],
+              [0, 199, 228],
+              [253, 214, 126],
+            ],
+            clock: 25,
           }
           let confetti = new window.ConfettiGenerator(confettiSettings)
           confetti.render()
