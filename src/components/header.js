@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'confetti-js'
 
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -113,7 +112,6 @@ export default class header extends Component {
         `}
         render={data => (
           <HeaderOuter>
-            {this.state.birthday && <Confetti id="birthday" />}
             <HeaderInner>
               <HeaderLeft>
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
