@@ -36,6 +36,17 @@ let HeaderLeft = styled.div``
 
 let HeaderRight = styled.div``
 
+let Available = styled.div`
+  padding: 10px 30px;
+  background: ${props => props.theme.primary};
+  color: white;
+  position: fixed;
+  border-radius: 50px;
+  transform: rotate(20deg);
+  right: 0;
+  top: 60px;
+`
+
 let TodaysDate = styled.h2`
   font-style: ${props => props.theme.primaryFont};
 `
@@ -142,6 +153,9 @@ export default class header extends Component {
                 </HeaderCopy>
                 <CTA>Get in touch</CTA>
               </HeaderLeft>
+              {data.allContentfulHeader.edges[0].node.availableForWork && (
+                <Available>I'm available for freelance projects!</Available>
+              )}
             </HeaderInner>
           </HeaderOuter>
         )}
