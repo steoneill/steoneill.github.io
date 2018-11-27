@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 /*
@@ -29,7 +29,13 @@ const Menu = () => (
     `}
     render={data => {
       let menuItems = data.allContentfulMenuItem.edges
-      menuItems.forEach(element => <p>{element.node.title}</p>)
+      console.log(menuItems)
+      return (
+        <Fragment>
+          {menuItems.length > 0 &&
+            menuItems.map(item => <p>{item.node.title}</p>)}
+        </Fragment>
+      )
     }}
   />
 )
