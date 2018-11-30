@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'confetti-js'
 
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -37,6 +36,17 @@ let HeaderInner = styled.div`
 let HeaderLeft = styled.div``
 
 let HeaderRight = styled.div``
+
+let Available = styled.div`
+  padding: 10px 30px;
+  background: ${props => props.theme.primary};
+  color: white;
+  position: fixed;
+  border-radius: 50px;
+  transform: rotate(20deg);
+  right: 0;
+  top: 60px;
+`
 
 let TodaysDate = styled.h2`
   font-style: ${props => props.theme.primaryFont};
@@ -91,34 +101,7 @@ export default class header extends Component {
     }
   }
 
-  componentDidMount = () => {
-    if (typeof window != undefined) {
-      this.setState = { confetti: true, birthday: true }
-      if (dd === 19 && mm === 11) {
-        this.setState({
-          birthday: true,
-          confetti: true,
-        })
-        setTimeout(() => {
-          let confettiSettings = {
-            target: 'birthday',
-            max: 30,
-            animate: true,
-            props: ['circle'],
-            colors: [
-              [165, 104, 246],
-              [230, 61, 135],
-              [0, 199, 228],
-              [253, 214, 126],
-            ],
-            clock: 25,
-          }
-          let confetti = new window.ConfettiGenerator(confettiSettings)
-          confetti.render()
-        }, 200)
-      }
-    }
-  }
+  componentDidMount = () => {}
 
   todaysCopy() {
     if (this.state.birthday) {
@@ -150,24 +133,43 @@ export default class header extends Component {
                 }
               }
             }
+            allContentfulHeader {
+              edges {
+                node {
+                  boldText
+                  availableForWork
+                  headerCopy {
+                    content {
+                      content {
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         `}
         render={data => (
           <HeaderOuter>
-            {this.state.birthday && <Confetti id="birthday" />}
             <HeaderInner>
               <HeaderLeft>
+                {console.log(data)}
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
-                <Greeting>My name's Ste!</Greeting>
+                <Greeting>
+                  {data.allContentfulHeader.edges[0].node.boldText}
+                </Greeting>
                 <HeaderCopy>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero
-                  at laudantium dignissimos ducimus nihil consectetur autem
-                  pariatur exercitationem natus repellat. Incidunt blanditiis
-                  qui alias voluptatibus consectetur eos doloremque ex aut!
+                  {
+                    data.allContentfulHeader.edges[0].node.headerCopy.content[0]
+                      .content[0].value
+                  }
                 </HeaderCopy>
                 <CTA>Get in touch</CTA>
               </HeaderLeft>
-              <Img fluid={data.headerImage.childImageSharp.fluid} />
+              {data.allContentfulHeader.edges[0].node.availableForWork && (
+                <Available>I'm available for freelance projects!</Available>
+              )}
             </HeaderInner>
           </HeaderOuter>
         )}

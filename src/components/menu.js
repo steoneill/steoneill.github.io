@@ -12,31 +12,5 @@ import styled from 'styled-components'
  * - `StaticQuery`: https://gatsby.app/staticquery
  */
 
-const Menu = () => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allContentfulMenuItem {
-          edges {
-            node {
-              id
-              title
-              link
-            }
-          }
-        }
-      }
-    `}
-    render={data => {
-      let menuItems = data.allContentfulMenuItem.edges
-      console.log(menuItems)
-      return (
-        <Fragment>
-          {menuItems.length > 0 &&
-            menuItems.map(item => <p>{item.node.title}</p>)}
-        </Fragment>
-      )
-    }}
-  />
-)
+const Menu = () => <Fragment />
 export default Menu
