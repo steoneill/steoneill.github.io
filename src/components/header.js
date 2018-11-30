@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 
 import styled from 'styled-components'
@@ -68,12 +68,13 @@ let HeaderCopy = styled.p`
   margin: 0 auto 30px;
 `
 
-let CTA = styled.a`
+let CTA = styled(Link)`
   background: ${props => props.theme.primary};
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: ${props => props.theme.bsPink};
+  text-decoration: none;
 `
 
 let Confetti = styled.canvas`
@@ -165,7 +166,7 @@ export default class header extends Component {
                       .content[0].value
                   }
                 </HeaderCopy>
-                <CTA>Get in touch</CTA>
+                <CTA to={'/contact'}>Get in touch</CTA>
               </HeaderLeft>
               {data.allContentfulHeader.edges[0].node.availableForWork && (
                 <Available>I'm available for freelance projects!</Available>
