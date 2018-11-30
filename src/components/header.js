@@ -29,6 +29,7 @@ let HeaderInner = styled.div`
   max-width: 1000px;
   width: 100%;
   margin: auto;
+  text-align: center;
 
   display: flex;
 `
@@ -39,18 +40,22 @@ let HeaderRight = styled.div``
 
 let TodaysDate = styled.h2`
   font-style: ${props => props.theme.primaryFont};
+  margin: 0;
+  padding: 0;
 `
 
 let Greeting = styled.h1`
   font-size: 40px;
   color: ${props => props.theme.primary};
+  margin-top: 0;
 `
 
 let HeaderCopy = styled.p`
   font-size: 16px;
+  line-height: 24px;
   font-family: ${props => props.theme.secondaryFont};
   width: 50%;
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
 `
 
 let CTA = styled.a`
@@ -58,6 +63,7 @@ let CTA = styled.a`
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
+  box-shadow: ${props => props.theme.bsPink};
 `
 
 let Confetti = styled.canvas`
@@ -129,10 +135,18 @@ export default class header extends Component {
       <StaticQuery
         query={graphql`
           query {
-            headerImage: file(relativePath: { eq: "hero_photo.jpg" }) {
-              childImageSharp {
-                fluid(maxWidth: 2000) {
-                  ...GatsbyImageSharpFluid_tracedSVG
+            allContentfulHeader {
+              edges {
+                node {
+                  boldText
+                  availableForWork
+                  headerCopy {
+                    content {
+                      content {
+                        value
+                      }
+                    }
+                  }
                 }
               }
             }
