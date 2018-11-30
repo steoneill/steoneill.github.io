@@ -13,6 +13,8 @@ let Theme = {
   maxWidth: '1200px',
   primaryFont: `'Montserrat', sans-serif`,
   secondaryFont: `'Playfair Display', serif`,
+  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
+  bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
 }
 
 let Global = createGlobalStyle`
