@@ -12,5 +12,11 @@ import styled from 'styled-components'
  * - `StaticQuery`: https://gatsby.app/staticquery
  */
 
+let MenuItemContainer = styled.span`
+  width: 100%;
+`
+
+let MenuItem = () => <MenuItemContainer />
+
 const Menu = () => <Fragment />
 export default Menu
