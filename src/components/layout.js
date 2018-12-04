@@ -29,14 +29,6 @@ let Dark = {
   headerBackground: '#5F53FD',
 }
 
-let themeSelection = () => {
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches === false) {
-    return Light
-  } else {
-    return Dark
-  }
-}
-
 let Global = createGlobalStyle`
   body {
     padding: 0;
@@ -71,7 +63,7 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <ThemeProvider theme={themeSelection()}>
+        <ThemeProvider theme={Light}>
           <Fragment>
             <Header siteTitle={data.site.siteMetadata.title} />
             <Global />
