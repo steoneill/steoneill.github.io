@@ -33,8 +33,8 @@ let Global = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    color: ${themeSelection().black};
-    font-family: ${themeSelection().primaryFont};
+    color: ${Theme.black};
+    font-family: ${Theme.primaryFont};
   }
 `
 
