@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
+import HeaderMask from '../images/header_mask.png'
 let d = new Date()
 let weekday = new Array(7)
 weekday[0] = 'Sunday'
@@ -42,6 +43,13 @@ let HeaderInner = styled.div`
   display: flex;
 `
 
+let HeaderImage = styled(Image)`
+  img {
+    mask-image: ${HeaderMask};
+    mask-type: alpha;
+  }
+`
+
 let HeaderLeft = styled.div`
   width: 50%;
   text-align: left;
@@ -80,7 +88,7 @@ let HeaderCopy = styled.p`
   font-family: ${props => props.theme.secondaryFont};
 `
 
-let CTA = styled(Link)`
+let CTA = styled.a`
   background: ${props => props.theme.primary};
   color: white;
   padding: 10px 20px;
@@ -145,7 +153,6 @@ export default class header extends Component {
           <HeaderOuter>
             <HeaderInner>
               <HeaderLeft>
-                {console.log(data)}
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
                 <Greeting>{data.contentfulHeader.boldText}</Greeting>
                 <HeaderCopy>
@@ -154,7 +161,7 @@ export default class header extends Component {
                 <CTA to={'/contact'}>Get in touch</CTA>
               </HeaderLeft>
               <HeaderRight>
-                <Image fluid={data.contentfulHeader.headerImage.fluid} />
+                <HeaderImage fluid={data.contentfulHeader.headerImage.fluid} />
               </HeaderRight>
               {data.contentfulHeader.availableForWork && (
                 <Available>I'm available for freelance projects!</Available>
