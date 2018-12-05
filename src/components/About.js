@@ -4,9 +4,32 @@ import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
 
 let ImageItem = s(Image)`
-max-width: 400px;
+max-width: 300px;
 border-radius: 5px;
+box-shadow: ${props => props.theme.bs};
+margin: 5px;
+position: absolute!important;
+transition: all 0.2s;
 
+&:hover {
+ transform: scale(1.2);
+ z-index: 999;
+}
+
+ &.image{
+  &-0{
+    top: 0;
+    left: 328px;
+  }
+  &-1 {
+    top: 10px;
+    left: 20px;
+  }
+  &-2 {
+    top: 100px;
+    left: 160px;
+  }
+}
 `
 
 let AboutOuter = s.section`
@@ -17,6 +40,12 @@ let AboutOuter = s.section`
 
 let AboutContent = s.div`
   grid-area: content;
+`
+
+let AboutImages = s.div`
+  grid-area: image;
+  position: relative;
+  padding: 50px 0;
 `
 
 export default class About extends Component {
@@ -35,8 +64,10 @@ export default class About extends Component {
                 }
               }
               images {
-                fluid(maxWidth: 500) {
-                  ...GatsbyContentfulFluid_tracedSVG
+                id
+                title
+                fixed(width: 300, height: 200, cropFocus: FACES) {
+                  ...GatsbyContentfulFixed
                 }
               }
             }
@@ -48,10 +79,18 @@ export default class About extends Component {
               <AboutContent>
                 <h2>{data.contentfulAbout.title}</h2>
                 <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
-                {data.contentfulAbout.images.map(image => {
-                  return <ImageItem fluid={image.fluid} />
-                })}
               </AboutContent>
+              <AboutImages>
+                {data.contentfulAbout.images.map((image, i) => {
+                  return (
+                    <ImageItem
+                      fixed={image.fixed}
+                      className={`image-${i}`}
+                      key={image.id}
+                    />
+                  )
+                })}
+              </AboutImages>
             </AboutOuter>
           )
         }}
