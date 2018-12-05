@@ -9,10 +9,10 @@ border-radius: 5px;
 box-shadow: ${props => props.theme.bs};
 margin: 5px;
 position: absolute!important;
-transition: all 0.2s;
+transition: all 0.3s;
 
 &:hover {
- transform: scale(1.2);
+ transform: scale(1.3);
  z-index: 999;
 }
 
@@ -28,6 +28,10 @@ transition: all 0.2s;
   &-2 {
     top: 100px;
     left: 160px;
+  }
+  &-3 {
+    top: 20px;
+    left: 100px;
   }
 }
 `
