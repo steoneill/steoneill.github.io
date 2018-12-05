@@ -42,6 +42,10 @@ let AboutOuter = s.section`
   grid-template-areas: 'image content';
 `
 
+let AboutInner = s.div`
+  max-width: ${props => props.theme.maxWidth};
+`
+
 let AboutContent = s.div`
   grid-area: content;
 `
@@ -80,21 +84,23 @@ export default class About extends Component {
         render={data => {
           return (
             <AboutOuter>
-              <AboutContent>
-                <h2>{data.contentfulAbout.title}</h2>
-                <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
-              </AboutContent>
-              <AboutImages>
-                {data.contentfulAbout.images.map((image, i) => {
-                  return (
-                    <ImageItem
-                      fixed={image.fixed}
-                      className={`image-${i}`}
-                      key={image.id}
-                    />
-                  )
-                })}
-              </AboutImages>
+              <AboutInner>
+                <AboutContent>
+                  <h2>{data.contentfulAbout.title}</h2>
+                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
+                </AboutContent>
+                <AboutImages>
+                  {data.contentfulAbout.images.map((image, i) => {
+                    return (
+                      <ImageItem
+                        fixed={image.fixed}
+                        className={`image-${i}`}
+                        key={image.id}
+                      />
+                    )
+                  })}
+                </AboutImages>
+              </AboutInner>
             </AboutOuter>
           )
         }}
