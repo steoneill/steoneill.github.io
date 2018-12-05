@@ -37,13 +37,14 @@ transition: all 0.3s;
 `
 
 let AboutOuter = s.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'image content';
+
 `
 
 let AboutInner = s.div`
   max-width: ${props => props.theme.maxWidth};
+    display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'image content';
 `
 
 let AboutContent = s.div`
