@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import s from 'styled-components'
+import s, { keyframes } from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
 
@@ -37,14 +37,18 @@ transition: all 0.3s;
 `
 
 let AboutOuter = s.section`
-
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
 `
 
 let AboutInner = s.div`
   max-width: ${props => props.theme.maxWidth};
-    display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'image content';
+  display: grid;
+  grid-template-areas: 'images content';
+  position: relative;
+
 `
 
 let AboutContent = s.div`
@@ -52,9 +56,7 @@ let AboutContent = s.div`
 `
 
 let AboutImages = s.div`
-  grid-area: image;
-  position: relative;
-  padding: 50px 0;
+  grid-area: images;
 `
 
 export default class About extends Component {
@@ -86,10 +88,6 @@ export default class About extends Component {
           return (
             <AboutOuter>
               <AboutInner>
-                <AboutContent>
-                  <h2>{data.contentfulAbout.title}</h2>
-                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
-                </AboutContent>
                 <AboutImages>
                   {data.contentfulAbout.images.map((image, i) => {
                     return (
@@ -101,6 +99,10 @@ export default class About extends Component {
                     )
                   })}
                 </AboutImages>
+                <AboutContent>
+                  <h2>{data.contentfulAbout.title}</h2>
+                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
+                </AboutContent>
               </AboutInner>
             </AboutOuter>
           )

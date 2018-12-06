@@ -21,18 +21,11 @@ let HeaderOuter = styled.header`
   display: flex;
   position: relative;
   background: ${props => props.theme.headerBackground};
-  margin-bottom: 20vh;
+`
 
-  &::after {
-    content: '';
-    height: 10vh;
-
-    position: absolute;
-    bottom: -10vh;
-    width: 100%;
-    border-radius: 0 0 30% 30%;
-    background: ${props => props.theme.headerBackground};
-  }
+let HeaderImage = styled(Image)`
+  border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+  box-shadow: ${props => props.theme.bs};
 `
 
 let HeaderInner = styled.div`
@@ -43,15 +36,11 @@ let HeaderInner = styled.div`
   display: flex;
 `
 
-let HeaderImage = styled(Image)`
-  img {
-    mask-image: ${HeaderMask};
-    mask-type: alpha;
-  }
-`
-
 let HeaderLeft = styled.div`
   width: 50%;
+  display: flex;
+  flex-direction: column;
+
   text-align: left;
 `
 
@@ -88,17 +77,18 @@ let HeaderCopy = styled.p`
   font-family: ${props => props.theme.secondaryFont};
 `
 
-let CTA = styled.a`
+let CTA = styled(Link)`
   background: ${props => props.theme.primary};
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: ${props => props.theme.bsPink};
   text-decoration: none;
-  transition: all 0.5s;
+  transition: all 0.2s;
+  align-self: self-start;
 
   &:hover {
-    transform: scale3d(1.2);
+    transform: scale(1.2);
   }
 `
 
