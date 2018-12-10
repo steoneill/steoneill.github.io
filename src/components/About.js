@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 
 let ImageItem = s(Image)`
 max-width: 300px;
+max-height: 200px;
 border-radius: 5px;
 box-shadow: ${props => props.theme.bs};
 margin: 5px;
@@ -77,7 +78,7 @@ export default class About extends Component {
               images {
                 id
                 title
-                fixed(width: 300, height: 200, cropFocus: FACES) {
+                fixed(width: 500, height: 400, cropFocus: FACES) {
                   ...GatsbyContentfulFixed
                 }
               }
@@ -88,7 +89,7 @@ export default class About extends Component {
           return (
             <AboutOuter>
               <AboutInner>
-                <AboutImages>
+                {/* <AboutImages>
                   {data.contentfulAbout.images.map((image, i) => {
                     return (
                       <ImageItem
@@ -98,7 +99,7 @@ export default class About extends Component {
                       />
                     )
                   })}
-                </AboutImages>
+                </AboutImages> */}
                 <AboutContent>
                   <h2>{data.contentfulAbout.title}</h2>
                   <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>

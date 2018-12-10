@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Image from 'gatsby-image'
 import HeaderMask from '../images/header_mask.png'
 let d = new Date()
@@ -29,7 +29,7 @@ let HeaderImage = styled(Image)`
 `
 
 let HeaderInner = styled.div`
-  max-width: 1000px;
+  max-width: ${props => props.theme.maxWidth};
   width: 100%;
   margin: auto;
   text-align: center;
@@ -150,9 +150,7 @@ export default class header extends Component {
                 </HeaderCopy>
                 <CTA to={'/contact'}>Get in touch</CTA>
               </HeaderLeft>
-              <HeaderRight>
-                <HeaderImage fluid={data.contentfulHeader.headerImage.fluid} />
-              </HeaderRight>
+              <HeaderRight />
               {data.contentfulHeader.availableForWork && (
                 <Available>I'm available for freelance projects!</Available>
               )}
