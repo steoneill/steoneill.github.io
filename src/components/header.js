@@ -20,7 +20,11 @@ let HeaderOuter = styled.header`
   height: 70vh;
   display: flex;
   position: relative;
+  flex-direction: column;
   background: ${props => props.theme.headerBackground};
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `
 
 let HeaderImage = styled(Image)`
@@ -34,14 +38,18 @@ let HeaderInner = styled.div`
   margin: auto;
   text-align: center;
   display: flex;
+  padding: 15px;
 `
 
 let HeaderLeft = styled.div`
-  width: 50%;
   display: flex;
   flex-direction: column;
 
   text-align: left;
+
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
 `
 
 let HeaderRight = styled.div`
@@ -87,6 +95,7 @@ let CTA = styled(Link)`
   transition: all 0.2s;
   align-self: self-start;
 
+  margin-top: 20px;
   &:hover {
     transform: scale(1.2);
   }
