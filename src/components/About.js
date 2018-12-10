@@ -36,13 +36,16 @@ let AboutOuter = styled.section`
 
 let AboutInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  display: flex;
-  position: relative;
+  display: grid;
+  grid-template-areas: 'content' 'images';
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
   padding: 15px;
-  flex-direction: column;
 
   @media screen and (min-width: 768px) {
-    flex-direction: row;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'images content';
   }
 `
 
