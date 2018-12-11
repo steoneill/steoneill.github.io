@@ -18,7 +18,7 @@ let today = weekday[d.getDay()]
 
 let HeaderOuter = styled.header`
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -40,6 +40,10 @@ let HeaderInner = styled.div`
   text-align: center;
   display: flex;
   padding: 15px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 let HeaderLeft = styled.div`
@@ -54,7 +58,9 @@ let HeaderLeft = styled.div`
 `
 
 let HeaderRight = styled.div`
-  width: 50%;
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
 `
 
 let Available = styled.div`
@@ -161,9 +167,8 @@ export default class header extends Component {
                   too seriously.
                   {window.location.pathname !== '/contact' && (
                     <Fragment>
-                      <br /> <br /> I'm currently building a new site, but feel
-                      free to <Link to={'/contact'}>contact me</Link> or check
-                      out the links below.
+                      <br /> <br /> I'm currently building a new site, so check
+                      back soon!
                     </Fragment>
                   )}
                 </HeaderCopy>
