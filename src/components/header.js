@@ -165,8 +165,7 @@ export default class header extends Component {
                   I'm a full stack web developer based in Leeds, England. I like
                   to make bold, beautiful websites that don't take themselves
                   too seriously.
-                  {window !== null &&
-                    window !== undefined &&
+                  {typeof window !== undefined &&
                     window.location.pathname !== '/contact' && (
                       <Fragment>
                         <br /> <br /> I'm currently building a new site, so
