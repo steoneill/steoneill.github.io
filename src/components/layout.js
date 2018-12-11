@@ -7,20 +7,34 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import Header from './header'
 
-let Theme = {
+let Light = {
   primary: '#F6207C',
   black: '#333333',
   maxWidth: '1200px',
   primaryFont: `'Montserrat', sans-serif`,
   secondaryFont: `'Playfair Display', serif`,
+  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
+  bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
+  headerBackground: '#ffffff',
+}
+
+let Dark = {
+  primary: 'red',
+  black: '#333333',
+  maxWidth: '1200px',
+  primaryFont: `'Montserrat', sans-serif`,
+  secondaryFont: `'Playfair Display', serif`,
+  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
+  bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
+  headerBackground: '#5F53FD',
 }
 
 let Global = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    color: ${Theme.black};
-    font-family: ${Theme.primaryFont};
+    color: ${Light.black};
+    font-family: ${Light.primaryFont};
   }
 `
 
@@ -40,26 +54,20 @@ const Layout = ({ children }) => (
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
-            { name: 'description', content: 'Sample' },
+            {
+              name: 'description',
+              content: `Hi, My name's Ste! I'm a full stack Javascript developer, based in Leeds. I'm currently available for freelance work in GraphQL, React and Node.`,
+            },
             { name: 'keywords', content: 'sample, something' },
           ]}
         >
           <html lang="en" />
         </Helmet>
-        <ThemeProvider theme={Theme}>
+        <ThemeProvider theme={Light}>
           <Fragment>
             <Header siteTitle={data.site.siteMetadata.title} />
             <Global />
-            <div
-              style={{
-                margin: '0 auto',
-                maxWidth: 960,
-                padding: '0px 1.0875rem 1.45rem',
-                paddingTop: 0,
-              }}
-            >
-              {children}
-            </div>
+            {children}
           </Fragment>
         </ThemeProvider>
       </Fragment>

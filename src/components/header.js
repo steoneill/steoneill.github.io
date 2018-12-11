@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
-import 'confetti-js'
-
-import { StaticQuery, graphql } from 'gatsby'
-import Img from 'gatsby-image'
-
-import styled from 'styled-components'
-
+import React, { Component, Fragment } from 'react'
+import { StaticQuery, graphql, Link } from 'gatsby'
+import styled, { keyframes } from 'styled-components'
+import Image from 'gatsby-image'
+import HeaderImage from '../assets/headerImage.svg'
+import HeaderMask from '../images/header_mask.png'
 let d = new Date()
-let dd = d.getDate()
-let mm = d.getMonth() + 1
 let weekday = new Array(7)
 weekday[0] = 'Sunday'
 weekday[1] = 'Monday'
@@ -22,55 +18,93 @@ let today = weekday[d.getDay()]
 
 let HeaderOuter = styled.header`
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   display: flex;
+  position: relative;
+  flex-direction: column;
+  background: ${props => props.theme.headerBackground};
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `
+
+// let HeaderImage = styled(Image)`
+//   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+//   box-shadow: ${props => props.theme.bs};
+// `
 
 let HeaderInner = styled.div`
-  max-width: 1000px;
+  max-width: ${props => props.theme.maxWidth};
   width: 100%;
   margin: auto;
-
+  text-align: center;
   display: flex;
+  padding: 15px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
-let HeaderLeft = styled.div``
+let HeaderLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 
-let HeaderRight = styled.div``
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
+`
+
+let HeaderRight = styled.div`
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
+`
+
+let Available = styled.div`
+  padding: 10px 30px;
+  background: ${props => props.theme.primary};
+  color: white;
+  position: fixed;
+  border-radius: 50px;
+  transform: rotate(20deg);
+  right: 0;
+  top: 60px;
+`
 
 let TodaysDate = styled.h2`
   font-style: ${props => props.theme.primaryFont};
+  margin: 0;
+  padding: 0;
 `
 
 let Greeting = styled.h1`
   font-size: 40px;
   color: ${props => props.theme.primary};
+  margin-top: 0;
 `
 
 let HeaderCopy = styled.p`
   font-size: 16px;
+  line-height: 24px;
   font-family: ${props => props.theme.secondaryFont};
-  width: 50%;
-  margin-bottom: 30px;
 `
 
-let CTA = styled.a`
+let CTA = styled(Link)`
   background: ${props => props.theme.primary};
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
-`
+  box-shadow: ${props => props.theme.bsPink};
+  text-decoration: none;
+  transition: all 0.2s;
+  align-self: self-start;
 
-let Confetti = styled.canvas`
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  &::after {
-    content: '';
-    width: 100%;
-    height: 100px;
-    background: red;
+  margin-top: 20px;
+  &:hover {
+    transform: scale(1.2);
   }
 `
 
@@ -85,29 +119,8 @@ export default class header extends Component {
       birthday: false,
     }
   }
-  //Turns on confetti
-  handleBirthdayFun = () => {
-    this.setState({
-      birthday: true,
-      confetti: true,
-    })
-    setTimeout(() => {
-      let confettiSettings = {
-        target: 'birthday',
-        max: '300',
-        clock: '10',
-        rotate: true,
-      }
-      let confetti = new window.ConfettiGenerator(confettiSettings)
-      confetti.render()
-    }, 200)
-  }
 
-  componentDidMount = () => {
-    if (dd === 19 && mm === 11) {
-      this.handleBirthdayFun()
-    }
-  }
+  componentDidMount = () => {}
 
   todaysCopy() {
     if (this.state.birthday) {
@@ -124,10 +137,19 @@ export default class header extends Component {
       <StaticQuery
         query={graphql`
           query {
-            headerImage: file(relativePath: { eq: "hero_photo.jpg" }) {
-              childImageSharp {
-                fluid(maxWidth: 2000) {
-                  ...GatsbyImageSharpFluid_tracedSVG
+            contentfulHeader {
+              boldText
+              availableForWork
+              headerImage {
+                fluid {
+                  ...GatsbyContentfulFluid_tracedSVG
+                }
+              }
+              headerCopy {
+                content {
+                  content {
+                    value
+                  }
                 }
               }
             }
@@ -135,20 +157,25 @@ export default class header extends Component {
         `}
         render={data => (
           <HeaderOuter>
-            {this.state.birthday && <Confetti id="birthday" />}
             <HeaderInner>
               <HeaderLeft>
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
-                <Greeting>My name's Ste!</Greeting>
+                <Greeting>{data.contentfulHeader.boldText}</Greeting>
                 <HeaderCopy>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero
-                  at laudantium dignissimos ducimus nihil consectetur autem
-                  pariatur exercitationem natus repellat. Incidunt blanditiis
-                  qui alias voluptatibus consectetur eos doloremque ex aut!
+                  I'm a full stack web developer based in Leeds, England. I like
+                  to make bold, beautiful websites that don't take themselves
+                  too seriously.
+                  <br /> <br /> I'm currently building a new site, so check back
+                  soon!
                 </HeaderCopy>
-                <CTA>Get in touch</CTA>
+                {/* <CTA to={'/contact'}>Get in touch</CTA> */}
               </HeaderLeft>
-              <Img fluid={data.headerImage.childImageSharp.fluid} />
+              <HeaderRight>
+                <img src={HeaderImage} />
+              </HeaderRight>
+              {data.contentfulHeader.availableForWork && (
+                <Available>I'm available for freelance projects!</Available>
+              )}
             </HeaderInner>
           </HeaderOuter>
         )}
