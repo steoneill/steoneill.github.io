@@ -18,7 +18,6 @@ let today = weekday[d.getDay()]
 
 let HeaderOuter = styled.header`
   width: 100%;
-  height: 100vh;
   display: flex;
   position: relative;
   flex-direction: column;
