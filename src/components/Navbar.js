@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logo from '../images/Logo.svg'
+import Logo from '../images/logo.svg'
 import styled from 'styled-components'
 
 let NavbarOuter = styled.nav`
