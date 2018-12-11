@@ -38,9 +38,11 @@ let HeaderInner = styled.div`
   text-align: center;
   display: flex;
   padding: 15px;
+  flex-direction: column;
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    width: 100%;
   }
 `
 
