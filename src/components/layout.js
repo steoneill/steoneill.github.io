@@ -4,8 +4,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-
-import Header from './header'
+import Navbar from './Navbar'
 
 let Light = {
   primary: '#F6207C',
@@ -65,7 +64,7 @@ const Layout = ({ children }) => (
         </Helmet>
         <ThemeProvider theme={Light}>
           <Fragment>
-            <Header siteTitle={data.site.siteMetadata.title} />
+            <Navbar />
             <Global />
             {children}
           </Fragment>

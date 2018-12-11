@@ -107,7 +107,7 @@ let CTA = styled(Link)`
   }
 `
 
-export default class header extends Component {
+export default class LandingHeader extends Component {
   constructor(props) {
     super(props)
 
