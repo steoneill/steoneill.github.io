@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import Image from 'gatsby-image'
-import HeaderImage from '../assets/headerImage.svg'
+import HeaderImage from '../images/headerImage.svg'
 import HeaderMask from '../images/header_mask.png'
 let d = new Date()
 let weekday = new Array(7)
