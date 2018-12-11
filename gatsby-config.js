@@ -7,6 +7,14 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/,
+        },
+      },
+    },
+    {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: `${process.env.CONTENTFUL_SPACE_ID}`,
@@ -25,6 +33,7 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
+    '@contentful/gatsby-transformer-contentful-richtext',
     {
       resolve: `gatsby-source-filesystem`,
       options: {

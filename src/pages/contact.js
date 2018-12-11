@@ -5,10 +5,10 @@ import Layout from '../components/layout'
 import SkillBlocks from '../components/SkillBlocks'
 import About from '../components/About'
 
-const IndexPage = () => (
+const ContactPage = () => (
   <Layout>
-
+    <h1>contact</h1>
   </Layout>
 )
 
-export default IndexPage
+export default ContactPage
