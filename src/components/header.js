@@ -35,7 +35,6 @@ let HeaderOuter = styled.header`
 
 let HeaderInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  width: 100%;
   margin: auto;
   text-align: center;
   display: flex;
