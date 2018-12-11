@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import Image from 'gatsby-image'
+import HeaderImage from '../assets/headerImage.svg'
 import HeaderMask from '../images/header_mask.png'
 let d = new Date()
 let weekday = new Array(7)
@@ -27,10 +28,10 @@ let HeaderOuter = styled.header`
   }
 `
 
-let HeaderImage = styled(Image)`
-  border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
-  box-shadow: ${props => props.theme.bs};
-`
+// let HeaderImage = styled(Image)`
+//   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+//   box-shadow: ${props => props.theme.bs};
+// `
 
 let HeaderInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
@@ -44,7 +45,7 @@ let HeaderInner = styled.div`
 let HeaderLeft = styled.div`
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
   text-align: left;
 
   @media screen and (min-width: 768px) {
@@ -155,11 +156,22 @@ export default class header extends Component {
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
                 <Greeting>{data.contentfulHeader.boldText}</Greeting>
                 <HeaderCopy>
-                  {data.contentfulHeader.headerCopy.content[0].content[0].value}
+                  I'm a full stack web developer based in Leeds, England. I like
+                  to make bold, beautiful websites that don't take themselves
+                  too seriously.
+                  {window.location.pathname !== '/contact' && (
+                    <Fragment>
+                      <br /> <br /> I'm currently building a new site, but feel
+                      free to <Link to={'/contact'}>contact me</Link> or check
+                      out the links below.
+                    </Fragment>
+                  )}
                 </HeaderCopy>
-                <CTA to={'/contact'}>Get in touch</CTA>
+                {/* <CTA to={'/contact'}>Get in touch</CTA> */}
               </HeaderLeft>
-              <HeaderRight />
+              <HeaderRight>
+                <img src={HeaderImage} />
+              </HeaderRight>
               {data.contentfulHeader.availableForWork && (
                 <Available>I'm available for freelance projects!</Available>
               )}

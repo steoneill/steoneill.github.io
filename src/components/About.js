@@ -11,13 +11,10 @@ let ImageItem = styled(Image)`
   margin: 5px;
   transition: all 0.3s;
   position: absolute;
+  clear: both;
   top: 0;
   left: 0;
 
-  @media screen and (max-width: 768px) {
-    max-width: 150px;
-    max-height: 75px;
-  }
   &:hover {
     transform: scale(1.3);
     z-index: 999;
@@ -99,7 +96,7 @@ export default class About extends Component {
                     return (
                       <ImageItem
                         fixed={image.fixed}
-                        className={`image-${i}`}
+                        className={`image-${i + 1}`}
                         key={image.id}
                       />
                     )
