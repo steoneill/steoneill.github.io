@@ -86,7 +86,7 @@ let Greeting = styled.h1`
   margin-top: 0;
 `
 
-let HeaderCopy = styled.p`
+let HeaderCopy = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-family: ${props => props.theme.secondaryFont};
