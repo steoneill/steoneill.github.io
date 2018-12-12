@@ -137,9 +137,14 @@ export default class LandingHeader extends Component {
       <StaticQuery
         query={graphql`
           query {
-            contentfulHeader {
+            contentfulHeader(location: { eq: "landing" }) {
               boldText
               availableForWork
+              headerCopy {
+                childMarkdownRemark {
+                  html
+                }
+              }
             }
           }
         `}
@@ -150,11 +155,11 @@ export default class LandingHeader extends Component {
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
                 <Greeting>{data.contentfulHeader.boldText}</Greeting>
                 <HeaderCopy>
-                  I'm a full stack web developer based in Leeds, England. I like
-                  to make bold, beautiful websites that don't take themselves
-                  too seriously.
-                  <br /> <br /> I'm currently building a new site, so check back
-                  soon!
+                  dangerouslySetInnerHTML=
+                  {{
+                    __html:
+                      data.contentfulHeader.headerCopy.childMarkdownRemark.html,
+                  }}
                 </HeaderCopy>
                 {/* <CTA to={'/contact'}>Get in touch</CTA> */}
               </HeaderLeft>
