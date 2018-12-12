@@ -140,18 +140,6 @@ export default class LandingHeader extends Component {
             contentfulHeader {
               boldText
               availableForWork
-              headerImage {
-                fluid {
-                  ...GatsbyContentfulFluid_tracedSVG
-                }
-              }
-              headerCopy {
-                content {
-                  content {
-                    value
-                  }
-                }
-              }
             }
           }
         `}
