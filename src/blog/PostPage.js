@@ -9,10 +9,19 @@ let BlogHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: relative;
+  overflow: hidden;
+
+`
+
+let BlogContent = styled.div`
+  max-width: ${props => props.theme.maxWidth};
+  margin: 0 auto;
+  background: white;
 `
 
 let BlogImage = styled(Img)`
+width: 100%;
 
 `
 
@@ -30,8 +39,14 @@ export default class PostPage extends Component {
         <div>
           <BlogHeader>
             <BlogTitle>{data.contentfulBlogPost.title}</BlogTitle>
-            <BlogImage style={{position: 'absolute', left: '0', top: '0', width: '100%', height: '100%'}} fluid={data.contentfulBlogPost.headerImage.fluid} />
+            <Img style={{position: 'absolute', top:0, left:0, width: '100%', height: '100%'}} fluid={data.contentfulBlogPost.headerImage.fluid} />
           </BlogHeader>
+          <BlogContent
+          dangerouslySetInnerHTML={{
+            __html: data.contentfulBlogPost.body.childMarkdownRemark.html
+          }}
+        />
+
         </div>
       </Layout>
     )
@@ -42,6 +57,12 @@ export const query = graphql`
   query BlogPostQuery($slug: String!) {
     contentfulBlogPost(slug: { eq: $slug }) {
       title
+      body {
+        childMarkdownRemark {
+          timeToRead
+          html
+        }
+      }
       headerImage {
         fluid(maxWidth: 2000) {
           ...GatsbyContentfulFluid_tracedSVG
