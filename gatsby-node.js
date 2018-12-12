@@ -16,8 +16,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     `).then(result => {
       result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
         createPage({
-          path: '/posts/' + node.slug,
-          component: path.resolve('./src/posts/PostPage.js'),
+          path: '/blog/' + node.slug,
+          component: path.resolve('./src/blog/PostPage.js'),
           context: {
             slug: node.slug,
           },
