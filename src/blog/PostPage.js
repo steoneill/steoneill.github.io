@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 let BlogHeader = styled.header`
   height: 40vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,8 +13,7 @@ let BlogHeader = styled.header`
 `
 
 let BlogImage = styled(Img)`
-  width: 100vh;
-  position: initial !important;
+
 `
 
 let BlogTitle = styled.h1`
@@ -30,7 +30,7 @@ export default class PostPage extends Component {
         <div>
           <BlogHeader>
             <BlogTitle>{data.contentfulBlogPost.title}</BlogTitle>
-            <BlogImage fluid={data.contentfulBlogPost.headerImage.fluid} />
+            <BlogImage style={{position: 'absolute', left: '0', top: '0', width: '100%', height: '100%'}} fluid={data.contentfulBlogPost.headerImage.fluid} />
           </BlogHeader>
         </div>
       </Layout>
