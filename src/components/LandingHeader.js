@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import Image from 'gatsby-image'
-import HeaderImage from '../assets/headerImage.svg'
+import HeaderImage from '../images/headerImage.svg'
 import HeaderMask from '../images/header_mask.png'
 let d = new Date()
 let weekday = new Array(7)
@@ -18,7 +18,6 @@ let today = weekday[d.getDay()]
 
 let HeaderOuter = styled.header`
   width: 100%;
-  height: 100vh;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -35,14 +34,15 @@ let HeaderOuter = styled.header`
 
 let HeaderInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  width: 100%;
   margin: auto;
   text-align: center;
   display: flex;
   padding: 15px;
+  flex-direction: column;
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    width: 100%;
   }
 `
 
@@ -108,7 +108,7 @@ let CTA = styled(Link)`
   }
 `
 
-export default class header extends Component {
+export default class LandingHeader extends Component {
   constructor(props) {
     super(props)
 
