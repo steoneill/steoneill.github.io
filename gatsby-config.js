@@ -14,6 +14,7 @@ module.exports = {
         },
       },
     },
+    'gatsby-transformer-remark',
     {
       resolve: `gatsby-source-contentful`,
       options: {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Logo from '../images/logo.svg'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 let NavbarOuter = styled.nav`
@@ -17,7 +18,9 @@ export default class Navbar extends Component {
   render() {
     return (
       <NavbarOuter>
-        <LogoImage src={Logo} />
+        <Link to={'/'}>
+          <LogoImage src={Logo} />
+        </Link>
       </NavbarOuter>
     )
   }

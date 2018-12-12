@@ -57,7 +57,11 @@ const Layout = ({ children }) => (
               name: 'description',
               content: `Hi, My name's Ste! I'm a full stack Javascript developer, based in Leeds. I'm currently available for freelance work in GraphQL, React and Node.`,
             },
-            { name: 'keywords', content: 'sample, something' },
+            {
+              name: 'keywords',
+              content:
+                'javascript, developer, leeds, Leeds, england, web developer, node, react, react.js, node.js',
+            },
           ]}
         >
           <html lang="en" />
