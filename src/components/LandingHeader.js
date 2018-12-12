@@ -154,13 +154,12 @@ export default class LandingHeader extends Component {
               <HeaderLeft>
                 <TodaysDate>{this.todaysCopy()}</TodaysDate>
                 <Greeting>{data.contentfulHeader.boldText}</Greeting>
-                <HeaderCopy>
-                  dangerouslySetInnerHTML=
-                  {{
+                <HeaderCopy
+                  dangerouslySetInnerHTML={{
                     __html:
                       data.contentfulHeader.headerCopy.childMarkdownRemark.html,
                   }}
-                </HeaderCopy>
+                />
                 {/* <CTA to={'/contact'}>Get in touch</CTA> */}
               </HeaderLeft>
               <HeaderRight>
