@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Layout from '../components/layout'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import { graphql } from 'gatsby'
 
 let BlogHeader = styled.header`
   height: 40vh;
@@ -11,7 +12,6 @@ let BlogHeader = styled.header`
   justify-content: center;
   position: relative;
   overflow: hidden;
-
 `
 
 let BlogContent = styled.div`
@@ -21,8 +21,7 @@ let BlogContent = styled.div`
 `
 
 let BlogImage = styled(Img)`
-width: 100%;
-
+  width: 100%;
 `
 
 let BlogTitle = styled.h1`
@@ -39,14 +38,22 @@ export default class PostPage extends Component {
         <div>
           <BlogHeader>
             <BlogTitle>{data.contentfulBlogPost.title}</BlogTitle>
-            <Img style={{position: 'absolute', top:0, left:0, width: '100%', height: '100%'}} fluid={data.contentfulBlogPost.headerImage.fluid} />
+            <Img
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+              }}
+              fluid={data.contentfulBlogPost.headerImage.fluid}
+            />
           </BlogHeader>
           <BlogContent
-          dangerouslySetInnerHTML={{
-            __html: data.contentfulBlogPost.body.childMarkdownRemark.html
-          }}
-        />
-
+            dangerouslySetInnerHTML={{
+              __html: data.contentfulBlogPost.body.childMarkdownRemark.html,
+            }}
+          />
         </div>
       </Layout>
     )
