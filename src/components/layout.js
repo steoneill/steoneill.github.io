@@ -2,6 +2,9 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import Typekit from 'react-typekit'
+
+import AvailableForWork from './AvailableForWork'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Navbar from './Navbar'
@@ -10,22 +13,10 @@ let Light = {
   primary: '#F6207C',
   black: '#333333',
   maxWidth: '1200px',
-  primaryFont: `'Montserrat', sans-serif`,
-  secondaryFont: `'Playfair Display', serif`,
+  primaryFont: `futura-pt, sans-serif`,
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
   bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
   headerBackground: '#ffffff',
-}
-
-let Dark = {
-  primary: 'red',
-  black: '#333333',
-  maxWidth: '1200px',
-  primaryFont: `'Montserrat', sans-serif`,
-  secondaryFont: `'Playfair Display', serif`,
-  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
-  bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
-  headerBackground: '#5F53FD',
 }
 
 let Global = createGlobalStyle`
@@ -41,6 +32,9 @@ const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
+        contentfulSitewideContent {
+          availableForWork
+        }
         site {
           siteMetadata {
             title
@@ -69,7 +63,11 @@ const Layout = ({ children }) => (
         <ThemeProvider theme={Light}>
           <Fragment>
             <Navbar />
+            {data.contentfulSitewideContent.availableForWork && (
+              <AvailableForWork />
+            )}
             <Global />
+            <Typekit kitId={'kwe4fdq'} />
             {children}
           </Fragment>
         </ThemeProvider>

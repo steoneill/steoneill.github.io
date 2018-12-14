@@ -63,33 +63,28 @@ let HeaderRight = styled.div`
   }
 `
 
-let Available = styled.div`
-  padding: 10px 30px;
-  background: ${props => props.theme.primary};
-  color: white;
-  position: fixed;
-  border-radius: 50px;
-  transform: rotate(20deg);
-  right: 0;
-  top: 60px;
-`
-
 let TodaysDate = styled.h2`
   font-style: ${props => props.theme.primaryFont};
   margin: 0;
   padding: 0;
+  font-size: 39px;
+  font-weight: 700;
+  text-transform: uppercase;
 `
 
 let Greeting = styled.h1`
   font-size: 40px;
   color: ${props => props.theme.primary};
   margin-top: 0;
+  font-weight: 700;
+  font-size: 61px;
+  text-transform: uppercase;
+  margin-top: -20px;
 `
 
 let HeaderCopy = styled.div`
   font-size: 16px;
   line-height: 24px;
-  font-family: ${props => props.theme.secondaryFont};
 `
 
 let CTA = styled(Link)`
@@ -139,7 +134,6 @@ export default class LandingHeader extends Component {
           query {
             contentfulHeader(location: { eq: "landing" }) {
               boldText
-              availableForWork
               headerCopy {
                 childMarkdownRemark {
                   html
@@ -165,9 +159,6 @@ export default class LandingHeader extends Component {
               <HeaderRight>
                 <img src={HeaderImage} />
               </HeaderRight>
-              {data.contentfulHeader.availableForWork && (
-                <Available>I'm available for freelance projects!</Available>
-              )}
             </HeaderInner>
           </HeaderOuter>
         )}
