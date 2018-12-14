@@ -13,7 +13,7 @@ export default class ContactHeader extends Component {
       <StaticQuery
         query={graphql`
           query {
-            contentfulHeader(location: { eq: "contatct" }) {
+            contentfulHeader(location: { eq: "Contact" }) {
               headerCopy {
                 childMarkdownRemark {
                   html
