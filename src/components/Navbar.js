@@ -8,6 +8,10 @@ let NavbarOuter = styled.nav`
   padding: 15px;
   margin: 0 auto;
   max-width: ${props => props.theme.maxWidth};
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
 `
 
 let LogoImage = styled.img`

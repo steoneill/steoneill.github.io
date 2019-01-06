@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
+import Navbar from './Navbar'
 import Image from 'gatsby-image'
-import HeaderImage from '../images/headerImage.svg'
 import HeaderMask from '../images/header_mask.png'
+import AvailableForWork from './AvailableForWork'
+
+import Me from '../images/Me.svg'
 let d = new Date()
 let weekday = new Array(7)
 weekday[0] = 'Sunday'
@@ -16,21 +19,51 @@ weekday[6] = 'Saturday'
 
 let today = weekday[d.getDay()]
 
+let HeaderAnimation = styled.div`
+  transform: skewY(-8deg);
+  transform-origin: top left;
+  background-image: linear-gradient(56deg, #fb43b3 1%, #f6207c 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+`
+
 let HeaderOuter = styled.header`
   width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
-  background: ${props => props.theme.headerBackground};
+
   @media screen and (min-width: 768px) {
     flex-direction: row;
   }
 `
 
-// let HeaderImage = styled(Image)`
-//   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
-//   box-shadow: ${props => props.theme.bs};
-// `
+let LandingImage = styled.img`
+  position: absolute;
+  right: 0;
+  top: -130px;
+  min-width: 50%;
+  z-index: -1;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+let HeroCharacter = styled.img`
+  bottom: 0;
+  left: 0;
+  position: absolute;
+
+  width: 100%;
+  @media screen and (max-width: 1024px) {
+    position: relative;
+  }
+`
 
 let HeaderInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
@@ -51,20 +84,27 @@ let HeaderLeft = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  margin-bottom: 50px;
 
   @media screen and (min-width: 768px) {
     width: 50%;
+    height: 70vh;
+    margin-bottom: 0;
   }
 `
 
 let HeaderRight = styled.div`
+  position: relative;
+  width: 100%;
   @media screen and (min-width: 768px) {
     width: 50%;
+    background: none;
+    display: flex;
   }
 `
 
 let TodaysDate = styled.h2`
-  font-style: ${props => props.theme.primaryFont};
+  font-style: ${props => props.theme.secondaryFont};
   margin: 0;
   padding: 0;
   font-size: 39px;
@@ -73,30 +113,38 @@ let TodaysDate = styled.h2`
 `
 
 let Greeting = styled.h1`
-  font-size: 40px;
-  color: ${props => props.theme.primary};
+  font-size: 52px;
+  font-family: ${props => props.theme.secondaryFont};
+  color: white;
   margin-top: 0;
   font-weight: 700;
-  font-size: 61px;
-  text-transform: uppercase;
-  margin-top: -20px;
+  font-size: 52px;
+  line-height: 56px;
+  letter-spacing: -2px;
 `
 
 let HeaderCopy = styled.div`
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 26px;
+  width: 50%;
+  color: white;
+
+  @media screen and (max-width: 1024px) {
+    width: auto;
+  }
 `
 
 let CTA = styled(Link)`
+  color: ${props => props.theme.primary};
+
+  font-family: ${props => props.theme.secondaryFont};
+  background: white;
+  font-size: 10px;
   font-weight: 700;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #ffffff;
   letter-spacing: 2px;
-  text-align: center;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 40px;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border-radius: 5px;
   text-decoration: none;
   transition: all 0.2s;
   background-image: linear-gradient(-90deg, #ff9a8b 0%, #ff6a88 100%);
@@ -105,7 +153,7 @@ let CTA = styled(Link)`
 
   margin-top: 20px;
   &:hover {
-    transform: scale(1.2);
+    transform: scale(0.9);
   }
 `
 
@@ -138,6 +186,14 @@ export default class LandingHeader extends Component {
       <StaticQuery
         query={graphql`
           query {
+            contentfulSitewideContent {
+              availableForWork
+              underConstruction
+            }
+            file(name: { eq: "header_svg" }) {
+              absolutePath
+              id
+            }
             contentfulHeader(location: { eq: "landing" }) {
               boldText
               headerCopy {
@@ -150,9 +206,15 @@ export default class LandingHeader extends Component {
         `}
         render={data => (
           <HeaderOuter>
+            <HeaderAnimation />
+            <Navbar />
+
             <HeaderInner>
               <HeaderLeft>
-                <TodaysDate>{this.todaysCopy()}</TodaysDate>
+                {/* <TodaysDate>{this.todaysCopy()}</TodaysDate> */}
+                {data.contentfulSitewideContent.availableForWork && (
+                  <AvailableForWork />
+                )}
                 <Greeting>{data.contentfulHeader.boldText}</Greeting>
                 <HeaderCopy
                   dangerouslySetInnerHTML={{
@@ -160,10 +222,17 @@ export default class LandingHeader extends Component {
                       data.contentfulHeader.headerCopy.childMarkdownRemark.html,
                   }}
                 />
-                <CTA to={'/contact'}>Get in touch</CTA>
+                {!data.contentfulSitewideContent.underConstruction ? (
+                  <CTA to={'/contact'}>Get in touch</CTA>
+                ) : (
+                  <HeaderCopy>
+                    I'm currently working on this website, but in the background
+                    IT'S GETTING THERE! So, check back soon!
+                  </HeaderCopy>
+                )}
               </HeaderLeft>
               <HeaderRight>
-                <img src={HeaderImage} />
+                <HeroCharacter src={Me} />
               </HeaderRight>
             </HeaderInner>
           </HeaderOuter>

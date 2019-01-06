@@ -7,13 +7,14 @@ import Typekit from 'react-typekit'
 import AvailableForWork from './AvailableForWork'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import Navbar from './Navbar'
+// import Navbar from './Navbar'
 
 let Light = {
   primary: '#F6207C',
-  black: '#333333',
+  black: '#3B3D40',
   maxWidth: '1200px',
-  primaryFont: `futura-pt, sans-serif`,
+  primaryFont: `'Playfair Display', serif`,
+  secondaryFont: `'Montserrat', sans-serif`,
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
   bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
   headerBackground: '#ffffff',
@@ -31,10 +32,7 @@ let Global = createGlobalStyle`
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
-      query SiteTitleQuery {
-        contentfulSitewideContent {
-          availableForWork
-        }
+      query {
         site {
           siteMetadata {
             title
@@ -62,9 +60,9 @@ const Layout = ({ children }) => (
         </Helmet>
         <ThemeProvider theme={Light}>
           <Fragment>
-            <Navbar />
-            {data.contentfulSitewideContent.availableForWork && (
-              <AvailableForWork />
+            {console.log(
+              '%c Hey kid. Wanna see something COOL?? npx steoneill',
+              'background: #fff; color: #F6207C'
             )}
             <Global />
             <Typekit kitId={'kwe4fdq'} />
