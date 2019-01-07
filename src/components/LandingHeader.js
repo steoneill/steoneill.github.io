@@ -6,6 +6,8 @@ import Image from 'gatsby-image'
 import HeaderMask from '../images/header_mask.png'
 import AvailableForWork from './AvailableForWork'
 
+import { Spring } from 'react-spring'
+
 import Me from '../images/Me.svg'
 let d = new Date()
 let weekday = new Array(7)
@@ -206,33 +208,67 @@ export default class LandingHeader extends Component {
         `}
         render={data => (
           <HeaderOuter>
-            <HeaderAnimation />
+            <Spring
+              delay={50}
+              from={{ opacity: 0, height: '20%', position: 'relative' }}
+              to={{ opacity: 1, height: '100%', position: 'absolute' }}
+            >
+              {({ opacity, height }) => (
+                <HeaderAnimation style={{ opacity, height }} />
+              )}
+            </Spring>
             <Navbar />
-
             <HeaderInner>
               <HeaderLeft>
-                {/* <TodaysDate>{this.todaysCopy()}</TodaysDate> */}
                 {data.contentfulSitewideContent.availableForWork && (
-                  <AvailableForWork />
+                  <Spring
+                    delay={450}
+                    from={{ opacity: 0, left: -10000 }}
+                    to={{ opacity: 1, left: 0 }}
+                  >
+                    {({ opacity, left }) => (
+                      <AvailableForWork style={{ opacity, left }} />
+                    )}
+                  </Spring>
                 )}
                 <Greeting>{data.contentfulHeader.boldText}</Greeting>
-                <HeaderCopy
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      data.contentfulHeader.headerCopy.childMarkdownRemark.html,
-                  }}
-                />
-                {!data.contentfulSitewideContent.underConstruction ? (
-                  <CTA to={'/contact'}>Get in touch</CTA>
-                ) : (
-                  <HeaderCopy>
-                    I'm currently working on this website, but in the background
-                    IT'S GETTING THERE! So, check back soon!
-                  </HeaderCopy>
-                )}
+                <Spring
+                  from={{ opacity: 0 }}
+                  to={{ opacity: 1 }}
+                  data-propsData={data}
+                >
+                  {props => (
+                    <Fragment>
+                      {console.log(props)}
+                      {/* <HeaderCopy
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            data.contentfulHeader.headerCopy.childMarkdownRemark
+                              .html,
+                        }}
+                      /> */}
+                      {/* {!data.contentfulSitewideContent.underConstruction ? (
+                        <CTA to={'/contact'}>Get in touch</CTA>
+                      ) : (
+                        <HeaderCopy>
+                          I'm currently working on this website, but in the
+                          background IT'S GETTING THERE! So, check back soon!
+                        </HeaderCopy>
+                      )} */}
+                    </Fragment>
+                  )}
+                </Spring>
               </HeaderLeft>
               <HeaderRight>
-                <HeroCharacter src={Me} />
+                <Spring
+                  delay={800}
+                  from={{ opacity: 0, bottom: -400 }}
+                  to={{ opacity: 1, bottom: 0 }}
+                >
+                  {({ opacity, bottom }) => (
+                    <HeroCharacter src={Me} style={{ opacity, bottom }} />
+                  )}
+                </Spring>
               </HeaderRight>
             </HeaderInner>
           </HeaderOuter>

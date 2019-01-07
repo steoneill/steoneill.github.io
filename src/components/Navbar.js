@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Logo from '../images/logo.svg'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { Spring } from 'react-spring'
 
 let NavbarOuter = styled.nav`
   height: 100px;
@@ -22,9 +23,17 @@ export default class Navbar extends Component {
   render() {
     return (
       <NavbarOuter>
-        <Link to={'/'}>
-          <LogoImage src={Logo} />
-        </Link>
+        <Spring
+          delay={1000}
+          from={{ opacity: 0, bottom: '-100px' }}
+          to={{ opacity: 1, bottom: '0' }}
+        >
+          {({ opacity, bottom }) => (
+            <Link to={'/'}>
+              <LogoImage style={{ opacity, bottom }} src={Logo} />
+            </Link>
+          )}
+        </Spring>
       </NavbarOuter>
     )
   }
