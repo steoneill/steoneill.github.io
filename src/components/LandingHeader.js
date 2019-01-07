@@ -192,10 +192,6 @@ export default class LandingHeader extends Component {
               availableForWork
               underConstruction
             }
-            file(name: { eq: "header_svg" }) {
-              absolutePath
-              id
-            }
             contentfulHeader(location: { eq: "landing" }) {
               boldText
               headerCopy {
@@ -219,46 +215,35 @@ export default class LandingHeader extends Component {
             </Spring>
             <Navbar />
             <HeaderInner>
-              <HeaderLeft>
-                {data.contentfulSitewideContent.availableForWork && (
-                  <Spring
-                    delay={450}
-                    from={{ opacity: 0, left: -10000 }}
-                    to={{ opacity: 1, left: 0 }}
-                  >
-                    {({ opacity, left }) => (
-                      <AvailableForWork style={{ opacity, left }} />
-                    )}
-                  </Spring>
-                )}
-                <Greeting>{data.contentfulHeader.boldText}</Greeting>
-                <Spring
-                  from={{ opacity: 0 }}
-                  to={{ opacity: 1 }}
-                  data-propsData={data}
-                >
-                  {props => (
-                    <Fragment>
-                      {console.log(props)}
-                      {/* <HeaderCopy
+              <Spring delay={1000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
+                {props => {
+                  let { opacity } = props
+                  return (
+                    <HeaderLeft style={{ opacity }}>
+                      {data.contentfulSitewideContent.availableForWork && (
+                        <AvailableForWork />
+                      )}
+                      <Greeting>{data.contentfulHeader.boldText}</Greeting>
+                      <HeaderCopy
                         dangerouslySetInnerHTML={{
                           __html:
                             data.contentfulHeader.headerCopy.childMarkdownRemark
                               .html,
                         }}
-                      /> */}
-                      {/* {!data.contentfulSitewideContent.underConstruction ? (
+                      />
+                      {!data.contentfulSitewideContent.underConstruction ? (
                         <CTA to={'/contact'}>Get in touch</CTA>
                       ) : (
                         <HeaderCopy>
                           I'm currently working on this website, but in the
                           background IT'S GETTING THERE! So, check back soon!
                         </HeaderCopy>
-                      )} */}
-                    </Fragment>
-                  )}
-                </Spring>
-              </HeaderLeft>
+                      )}
+                    </HeaderLeft>
+                  )
+                }}
+              </Spring>
+
               <HeaderRight>
                 <Spring
                   delay={800}

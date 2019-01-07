@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
+import { Spring } from 'react-spring'
 
 let AvailablePill = styled.div`
   color: white;
@@ -12,6 +13,7 @@ let AvailablePill = styled.div`
   letter-spacing: 2px;
   border-radius: 15px;
   align-self: flex-start;
+  position: relative;
   margin: 10px 0;
 
   @media screen and (max-width: 768px) {
@@ -21,6 +23,21 @@ let AvailablePill = styled.div`
 
 export default class AvailableForWork extends Component {
   render() {
-    return <AvailablePill>I'm available for freelance work!</AvailablePill>
+    return (
+      <Fragment>
+        <Spring
+          delay={4000}
+          from={{ left: -1000, opacity: 0 }}
+          to={{ left: 0, opacity: 1 }}
+        >
+          {({ left, opacity }) => (
+            <AvailablePill style={{ left, opacity }}>
+              {console.log(opacity)}
+              I'm available for freelance work!
+            </AvailablePill>
+          )}
+        </Spring>
+      </Fragment>
+    )
   }
 }
