@@ -6,7 +6,7 @@ import Image from 'gatsby-image'
 import HeaderMask from '../images/header_mask.png'
 import AvailableForWork from './AvailableForWork'
 
-import { Spring } from 'react-spring'
+import { Spring, config } from 'react-spring'
 
 import Me from '../images/Me.svg'
 let d = new Date()
@@ -21,26 +21,61 @@ weekday[6] = 'Saturday'
 
 let today = weekday[d.getDay()]
 
-let HeaderAnimation = styled.div`
-  transform: skewY(-8deg);
-  transform-origin: top left;
-  background-image: linear-gradient(56deg, #fb43b3 1%, #f6207c 100%);
+let LargeBackgroundShape = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  background-image: linear-gradient(100deg, #ff6480, #f22e63);
+  top: -350px;
+  right: -110px;
+  border-radius: 8%;
+  width: 50%;
+  height: 800px;
+  transform: skew(3deg, 30deg);
+  opacity: 1;
   z-index: -1;
+  box-shadow: 0 10px 60px RGBA(228, 30, 134, 0.4);
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+let HeroCircle1 = styled.div`
+  position: absolute;
+  background-color: #009efd;
+  background-image: linear-gradient(100deg, #2af598, #009efd);
+  top: -250px;
+  left: -250px;
+  border-radius: 100%;
+  height: 500px;
+  width: 500px;
+  opacity: 0.2;
+  z-index: -1;
+`
+
+let HeroCircle2 = styled.div`
+  position: absolute;
+  background-color: #f22e63;
+  background-image: linear-gradient(100deg, #ff6480, #f22e63);
+  width: 80px;
+  height: 80px;
+  z-index: -1;
+  top: 150px;
+  left: 120px;
+  border-radius: 50%;
 `
 
 let HeaderOuter = styled.header`
   width: 100%;
   display: flex;
+  height: auto;
   position: relative;
   flex-direction: column;
+  background-image: linear-gradient(100deg, #ff6480, #f22e63);
 
   @media screen and (min-width: 768px) {
+    height: 100vh;
     flex-direction: row;
+    background-image: none;
   }
 `
 
@@ -105,40 +140,34 @@ let HeaderRight = styled.div`
   }
 `
 
-let TodaysDate = styled.h2`
-  font-style: ${props => props.theme.secondaryFont};
-  margin: 0;
-  padding: 0;
-  font-size: 39px;
-  font-weight: 700;
-  text-transform: uppercase;
-`
-
 let Greeting = styled.h1`
-  font-size: 52px;
+  font-size: 90px;
   font-family: ${props => props.theme.secondaryFont};
-  color: white;
+  color: ${props => props.theme.black};
   margin-top: 0;
   font-weight: 700;
-  font-size: 52px;
-  line-height: 56px;
+  line-height: 80px;
   letter-spacing: -2px;
+
+  @media screen and (max-width: 768px) {
+    color: white;
+  }
 `
 
 let HeaderCopy = styled.div`
   font-size: 20px;
   line-height: 26px;
-  width: 50%;
-  color: white;
+  font-weight: 400;
+  color: ${props => props.theme.black};
+  font-family: ${props => props.theme.secondaryFont};
 
   @media screen and (max-width: 1024px) {
     width: auto;
+    color: white;
   }
 `
 
 let CTA = styled(Link)`
-  color: ${props => props.theme.primary};
-
   font-family: ${props => props.theme.secondaryFont};
   background: white;
   font-size: 10px;
@@ -149,13 +178,19 @@ let CTA = styled(Link)`
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.2s;
-  background-image: linear-gradient(-90deg, #ff9a8b 0%, #ff6a88 100%);
   box-shadow: 0 7px 14px -7px #ff6d88;
   align-self: self-start;
+  background: white;
+  color: ${props => props.theme.primary};
 
   margin-top: 20px;
   &:hover {
     transform: scale(0.9);
+  }
+
+  @media screen and (min-width: 768px) {
+    color: white;
+    background-image: linear-gradient(100deg, #ff6480, #f22e63);
   }
 `
 
@@ -204,13 +239,24 @@ export default class LandingHeader extends Component {
         `}
         render={data => (
           <HeaderOuter>
+            <Spring from={{ opacity: 0 }} to={{ opacity: 0.2 }}>
+              {({ opacity }) => <HeroCircle1 style={{ opacity }} />}
+            </Spring>
+            <Spring from={{ opacity: 0 }} to={{ opacity: 0.8 }}>
+              {({ opacity }) => <HeroCircle2 style={{ opacity }} />}
+            </Spring>
             <Spring
-              delay={50}
-              from={{ opacity: 0, height: '20%', position: 'relative' }}
-              to={{ opacity: 1, height: '100%', position: 'absolute' }}
+              from={{
+                opacity: 0,
+                top: -650,
+              }}
+              to={{
+                opacity: 1,
+                top: -350,
+              }}
             >
-              {({ opacity, height }) => (
-                <HeaderAnimation style={{ opacity, height }} />
+              {({ opacity, top }) => (
+                <LargeBackgroundShape style={{ opacity, top }} />
               )}
             </Spring>
             <Navbar />
@@ -246,7 +292,7 @@ export default class LandingHeader extends Component {
 
               <HeaderRight>
                 <Spring
-                  delay={800}
+                  delay={200}
                   from={{ opacity: 0, bottom: -400 }}
                   to={{ opacity: 1, bottom: 0 }}
                 >

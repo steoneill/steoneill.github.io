@@ -5,7 +5,7 @@ import { Spring } from 'react-spring'
 let AvailablePill = styled.div`
   color: white;
   font-family: ${props => props.theme.secondaryFont};
-  background: rgba(255, 255, 255, 0.2);
+  background-image: linear-gradient(100deg, #ff6480, #f22e63);
   padding: 5px 15px;
   text-transform: uppercase;
   font-size: 10px;
@@ -18,6 +18,8 @@ let AvailablePill = styled.div`
 
   @media screen and (max-width: 768px) {
     margin-top: 150px;
+    background: rgba(255, 255, 255, 0.5);
+    color: ${props => props.theme.primary};
   }
 `
 
@@ -26,7 +28,7 @@ export default class AvailableForWork extends Component {
     return (
       <Fragment>
         <Spring
-          delay={1500}
+          delay={800}
           from={{ left: -1000, opacity: 0 }}
           to={{ left: 0, opacity: 1 }}
         >
