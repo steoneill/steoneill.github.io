@@ -1,25 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Navbar from './Navbar'
-import Image from 'gatsby-image'
-import HeaderMask from '../images/header_mask.png'
 import AvailableForWork from './AvailableForWork'
-
-import { Spring, config } from 'react-spring'
-
+import { Spring } from 'react-spring'
 import Me from '../images/Me.svg'
-let d = new Date()
-let weekday = new Array(7)
-weekday[0] = 'Sunday'
-weekday[1] = 'Monday'
-weekday[2] = 'Tuesday'
-weekday[3] = 'Wednesday'
-weekday[4] = 'Thursday'
-weekday[5] = 'Friday'
-weekday[6] = 'Saturday'
-
-let today = weekday[d.getDay()]
 
 let LargeBackgroundShape = styled.div`
   position: absolute;
@@ -33,9 +18,10 @@ let LargeBackgroundShape = styled.div`
   opacity: 1;
   z-index: -1;
   box-shadow: 0 10px 60px RGBA(228, 30, 134, 0.4);
+  display: none;
 
-  @media screen and (max-width: 768px) {
-    display: none;
+  @media screen and (min-width: 1024px) {
+    display: block;
   }
 `
 
@@ -72,22 +58,10 @@ let HeaderOuter = styled.header`
   flex-direction: column;
   background-image: linear-gradient(100deg, #ff6480, #f22e63);
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     height: 100vh;
     flex-direction: row;
     background-image: none;
-  }
-`
-
-let LandingImage = styled.img`
-  position: absolute;
-  right: 0;
-  top: -130px;
-  min-width: 50%;
-  z-index: -1;
-
-  @media screen and (max-width: 768px) {
-    display: none;
   }
 `
 
@@ -110,7 +84,7 @@ let HeaderInner = styled.div`
   padding: 15px;
   flex-direction: column;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     flex-direction: row;
     width: 100%;
   }
@@ -123,7 +97,7 @@ let HeaderLeft = styled.div`
   text-align: left;
   margin-bottom: 50px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     width: 50%;
     height: 70vh;
     margin-bottom: 0;
@@ -133,7 +107,7 @@ let HeaderLeft = styled.div`
 let HeaderRight = styled.div`
   position: relative;
   width: 100%;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     width: 50%;
     background: none;
     display: flex;
@@ -141,16 +115,18 @@ let HeaderRight = styled.div`
 `
 
 let Greeting = styled.h1`
-  font-size: 90px;
   font-family: ${props => props.theme.secondaryFont};
-  color: ${props => props.theme.black};
   margin-top: 0;
   font-weight: 700;
-  line-height: 80px;
   letter-spacing: -2px;
+  color: white;
+  font-size: 55px;
+  line-height: 45px;
 
-  @media screen and (max-width: 768px) {
-    color: white;
+  @media screen and (min-width: 1024px) {
+    color: ${props => props.theme.black};
+    font-size: 90px;
+    line-height: 80px;
   }
 `
 
@@ -188,36 +164,13 @@ let CTA = styled(Link)`
     transform: scale(0.9);
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     color: white;
     background-image: linear-gradient(100deg, #ff6480, #f22e63);
   }
 `
 
 export default class LandingHeader extends Component {
-  constructor(props) {
-    super(props)
-
-    this.todaysCopy = this.todaysCopy.bind(this)
-
-    this.state = {
-      confetti: null,
-      birthday: false,
-    }
-  }
-
-  componentDidMount = () => {}
-
-  todaysCopy() {
-    if (this.state.birthday) {
-      return `Today's my birthday!`
-    } else if (today === 'Friday') {
-      return `Thank god it's Friday!`
-    } else {
-      return `Happy ${today}!`
-    }
-  }
-
   render() {
     return (
       <StaticQuery

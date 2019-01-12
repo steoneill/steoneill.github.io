@@ -9,10 +9,14 @@ let NavbarOuter = styled.nav`
   padding: 15px;
   margin: 0 auto;
   max-width: ${props => props.theme.maxWidth};
-  width: 100%;
+  width: auto;
   position: absolute;
   left: 0;
   right: 0;
+
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
 `
 
 let LogoImage = styled.img`
