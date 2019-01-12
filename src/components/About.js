@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
-import Shape from '../images/About_Shape.svg'
 
 let ImageItem = styled(Image)`
   max-width: 300px;
@@ -11,10 +10,10 @@ let ImageItem = styled(Image)`
   box-shadow: ${props => props.theme.bs};
   margin: 5px;
   transition: all 0.3s;
-  position: absolute;
   clear: both;
   top: 0;
   left: 0;
+  position: absolute;
 
   &:hover {
     transform: scale(1.3);
@@ -27,6 +26,7 @@ let AboutOuter = styled.section`
   justify-content: center;
   justify-items: center;
   position: relative;
+  height: 60vh;
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
@@ -35,47 +35,46 @@ let AboutOuter = styled.section`
 
 let AboutInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  display: grid;
-  grid-template-areas: 'content' 'images';
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
   padding: 15px;
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 'content images';
-  }
-`
-
-let AboutContent = styled.div`
-  grid-area: content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 30px;
-`
-
-let AboutImages = styled.div`
-  grid-area: images;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 `
 
-let AboutShape = styled.img`
-  position: absolute;
-  z-index: -1;
-  top: -150px;
-  -webkit-transform: translateX(-104%);
-  -ms-transform: translateX(-104%);
-  transform: translateX(-104%);
-  left: 550px;
-  max-width: 680px;
-  max-height: 100%;
+let AboutContent = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 30vh 12vh;
 `
 
+let AboutTitle = styled.h2`
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  &::after {
+    content: '';
+    height: 10px;
+    width: 100%;
+    display: block;
+    background: #d2f1f9;
+    position: absolute;
+    bottom: 0px;
+    z-index: -1;
+  }
+`
+
+let AboutCopy = styled.p`
+  line-height: 20px;
+  font-size: 18px;
+  text-align: center;
+`
+
+let AboutImages = styled.div``
 export default class About extends Component {
   render() {
     return (
@@ -105,7 +104,7 @@ export default class About extends Component {
           return (
             <AboutOuter>
               <AboutInner>
-                <AboutImages>
+                <AboutContent>
                   {data.contentfulAbout.images.map((image, i) => {
                     return (
                       <ImageItem
@@ -115,13 +114,12 @@ export default class About extends Component {
                       />
                     )
                   })}
-                </AboutImages>
-                <AboutContent>
-                  <h2>{data.contentfulAbout.title}</h2>
-                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
+                  <AboutTitle>{data.contentfulAbout.title}</AboutTitle>
+                  <AboutCopy>
+                    {data.contentfulAbout.copy.content[0].content[0].value}
+                  </AboutCopy>
                 </AboutContent>
               </AboutInner>
-              <AboutShape src={Shape} />
             </AboutOuter>
           )
         }}

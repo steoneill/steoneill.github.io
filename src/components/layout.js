@@ -12,7 +12,6 @@ let Light = {
   primary: '#F6207C',
   black: '#3B3D40',
   maxWidth: '1200px',
-  primaryFont: `'Playfair Display', serif`,
   secondaryFont: `'Montserrat', sans-serif`,
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
   bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
@@ -24,7 +23,7 @@ let Global = createGlobalStyle`
     padding: 0;
     margin: 0;
     color: ${Light.black};
-    font-family: ${Light.primaryFont};
+    font-family: ${Light.secondaryFont};
   }
 `
 
