@@ -26,13 +26,12 @@ export default class AvailableForWork extends Component {
     return (
       <Fragment>
         <Spring
-          delay={4000}
+          delay={1500}
           from={{ left: -1000, opacity: 0 }}
           to={{ left: 0, opacity: 1 }}
         >
           {({ left, opacity }) => (
             <AvailablePill style={{ left, opacity }}>
-              {console.log(opacity)}
               I'm available for freelance work!
             </AvailablePill>
           )}
