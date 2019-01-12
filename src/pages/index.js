@@ -9,6 +9,7 @@ import About from '../components/About'
 const IndexPage = () => (
   <Layout>
     <LandingHeader />
+    <About />
   </Layout>
 )
 

@@ -16,7 +16,7 @@ let AvailablePill = styled.div`
   position: relative;
   margin: 10px 0;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     margin-top: 150px;
     background: rgba(255, 255, 255, 0.5);
     color: ${props => props.theme.primary};

@@ -25,6 +25,26 @@ let LargeBackgroundShape = styled.div`
   }
 `
 
+let HeroBackground = styled.div`
+  position: absolute;
+  opacity: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: none;
+  background-repeat: repeat-x;
+  background-color: #f22e63;
+  background-image: linear-gradient(100deg, #ff6480, #f22e63);
+  transform-origin: top left;
+  transform: skewY(-8deg);
+  z-index: -1;
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`
+
 let HeroCircle1 = styled.div`
   position: absolute;
   background-color: #009efd;
@@ -36,6 +56,11 @@ let HeroCircle1 = styled.div`
   width: 500px;
   opacity: 0.2;
   z-index: -1;
+  display: none;
+
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
 `
 
 let HeroCircle2 = styled.div`
@@ -48,6 +73,11 @@ let HeroCircle2 = styled.div`
   top: 150px;
   left: 120px;
   border-radius: 50%;
+  display: none;
+
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
 `
 
 let HeaderOuter = styled.header`
@@ -56,12 +86,10 @@ let HeaderOuter = styled.header`
   height: auto;
   position: relative;
   flex-direction: column;
-  background-image: linear-gradient(100deg, #ff6480, #f22e63);
 
   @media screen and (min-width: 1024px) {
     height: 100vh;
     flex-direction: row;
-    background-image: none;
   }
 `
 
@@ -192,10 +220,11 @@ export default class LandingHeader extends Component {
         `}
         render={data => (
           <HeaderOuter>
-            <Spring from={{ opacity: 0 }} to={{ opacity: 0.2 }}>
+            <HeroBackground />
+            <Spring delay={500} from={{ opacity: 0 }} to={{ opacity: 0.2 }}>
               {({ opacity }) => <HeroCircle1 style={{ opacity }} />}
             </Spring>
-            <Spring from={{ opacity: 0 }} to={{ opacity: 0.8 }}>
+            <Spring delay={800} from={{ opacity: 0 }} to={{ opacity: 0.8 }}>
               {({ opacity }) => <HeroCircle2 style={{ opacity }} />}
             </Spring>
             <Spring

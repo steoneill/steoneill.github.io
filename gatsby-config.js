@@ -49,6 +49,7 @@ module.exports = {
         fonts: [
           `Playfair Display`,
           `Montserrat\:300,400,400i,700`, // you can also specify font weights and styles
+          `Poppins\:300,400,400i,700`,
         ],
       },
     },

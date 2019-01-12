@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
+import Shape from '../images/About_Shape.svg'
 
 let ImageItem = styled(Image)`
   max-width: 300px;
@@ -25,6 +26,7 @@ let AboutOuter = styled.section`
   display: flex;
   justify-content: center;
   justify-items: center;
+  position: relative;
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
@@ -42,7 +44,7 @@ let AboutInner = styled.div`
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: 'images content';
+    grid-template-areas: 'content images';
   }
 `
 
@@ -60,6 +62,18 @@ let AboutImages = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`
+
+let AboutShape = styled.img`
+  position: absolute;
+  z-index: -1;
+  top: -150px;
+  -webkit-transform: translateX(-104%);
+  -ms-transform: translateX(-104%);
+  transform: translateX(-104%);
+  left: 550px;
+  max-width: 680px;
+  max-height: 100%;
 `
 
 export default class About extends Component {
@@ -107,6 +121,7 @@ export default class About extends Component {
                   <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
                 </AboutContent>
               </AboutInner>
+              <AboutShape src={Shape} />
             </AboutOuter>
           )
         }}
