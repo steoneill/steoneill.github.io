@@ -88,8 +88,9 @@ let HeaderOuter = styled.header`
   flex-direction: column;
 
   @media screen and (min-width: 1024px) {
-    height: 100vh;
+    height: 80vh;
     flex-direction: row;
+    padding-bottom: 120px;
   }
 `
 

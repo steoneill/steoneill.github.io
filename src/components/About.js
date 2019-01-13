@@ -10,34 +10,40 @@ let AboutOuter = styled.section`
   justify-content: center;
   justify-items: center;
   position: relative;
-  height: 80vh;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column-reverse;
-  }
+  z-index: 1;
+  height: 90vh;
+  box-sizing: border-box;
 `
 
 let AboutInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  padding: 15px;
+  padding: 90px 15px;
   display: flex;
-  justify-content: space-between;
+
+  margin-bottom: 120px;
 `
 
-let AboutContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 30px;
-  width: 50%;
+let AboutContent = styled.div``
+
+let AboutImages = styled.div``
+let Wave = styled.svg`
+  background: #f4edf5;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: auto;
+
+  path {
+    fill: white;
+  }
 `
 
-let AboutImages = styled.div`
-  position: relative;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+let WaveOuter = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
 `
 
 export default class About extends Component {
@@ -58,7 +64,7 @@ export default class About extends Component {
               images {
                 id
                 title
-                fixed(width: 500, height: 400, cropFocus: FACES) {
+                fixed(width: 450, height: 450, cropFocus: FACES) {
                   ...GatsbyContentfulFixed
                 }
               }
@@ -67,9 +73,9 @@ export default class About extends Component {
         `}
         render={data => {
           return (
-            <section>
-              <div>
-                <div>
+            <AboutOuter>
+              <AboutInner>
+                <AboutImages>
                   {/* {data.contentfulAbout.images.map((image, i) => {
                     return (
                       <ImageItem
@@ -79,13 +85,22 @@ export default class About extends Component {
                       />
                     )
                   })} */}
-                </div>
-                <div>
+                </AboutImages>
+                <AboutContent>
                   <h2>{data.contentfulAbout.title}</h2>
                   <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
-                </div>
-              </div>
-            </section>
+                </AboutContent>
+              </AboutInner>
+              <WaveOuter>
+                <Wave
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  viewBox="0 0 3600 248"
+                >
+                  <path d="M3601,31.227S2736.31,201.97,1661,72.2C547.345-62.2,0,32.227,0,32.227V343H3602Z" />
+                </Wave>
+              </WaveOuter>
+            </AboutOuter>
           )
         }}
       />
