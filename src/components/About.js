@@ -3,30 +3,14 @@ import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
 
-let ImageItem = styled(Image)`
-  max-width: 300px;
-  max-height: 200px;
-  border-radius: 5px;
-  box-shadow: ${props => props.theme.bs};
-  margin: 5px;
-  transition: all 0.3s;
-  clear: both;
-  top: 0;
-  left: 0;
-  position: absolute;
-
-  &:hover {
-    transform: scale(1.3);
-    z-index: 999;
-  }
-`
+let ImageItem = styled(Image)``
 
 let AboutOuter = styled.section`
   display: flex;
   justify-content: center;
   justify-items: center;
   position: relative;
-  height: 60vh;
+  height: 80vh;
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
@@ -36,45 +20,26 @@ let AboutOuter = styled.section`
 let AboutInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
   padding: 15px;
-  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
 `
 
 let AboutContent = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  z-index: 1;
-  padding: 30vh 12vh;
+  justify-content: center;
+  margin-right: 30px;
+  width: 50%;
 `
 
-let AboutTitle = styled.h2`
-  font-size: 25px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+let AboutImages = styled.div`
   position: relative;
-  &::after {
-    content: '';
-    height: 10px;
-    width: 100%;
-    display: block;
-    background: #d2f1f9;
-    position: absolute;
-    bottom: 0px;
-    z-index: -1;
-  }
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
-let AboutCopy = styled.p`
-  line-height: 20px;
-  font-size: 18px;
-  text-align: center;
-`
-
-let AboutImages = styled.div``
 export default class About extends Component {
   render() {
     return (
@@ -102,10 +67,10 @@ export default class About extends Component {
         `}
         render={data => {
           return (
-            <AboutOuter>
-              <AboutInner>
-                <AboutContent>
-                  {data.contentfulAbout.images.map((image, i) => {
+            <section>
+              <div>
+                <div>
+                  {/* {data.contentfulAbout.images.map((image, i) => {
                     return (
                       <ImageItem
                         fixed={image.fixed}
@@ -113,14 +78,14 @@ export default class About extends Component {
                         key={image.id}
                       />
                     )
-                  })}
-                  <AboutTitle>{data.contentfulAbout.title}</AboutTitle>
-                  <AboutCopy>
-                    {data.contentfulAbout.copy.content[0].content[0].value}
-                  </AboutCopy>
-                </AboutContent>
-              </AboutInner>
-            </AboutOuter>
+                  })} */}
+                </div>
+                <div>
+                  <h2>{data.contentfulAbout.title}</h2>
+                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
+                </div>
+              </div>
+            </section>
           )
         }}
       />

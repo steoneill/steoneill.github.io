@@ -93,15 +93,17 @@ let HeaderOuter = styled.header`
   }
 `
 
-let HeroCharacter = styled.img`
+let HeroCharacter = styled(Me)`
   bottom: 0;
   left: 0;
   position: absolute;
-
-  width: 100%;
   @media screen and (max-width: 1024px) {
     position: relative;
   }
+`
+
+let HeroCharacterWrapper = styled.object`
+  width: 50%;
 `
 
 let HeaderInner = styled.div`
@@ -279,7 +281,9 @@ export default class LandingHeader extends Component {
                   to={{ opacity: 1, bottom: 0 }}
                 >
                   {({ opacity, bottom }) => (
-                    <HeroCharacter src={Me} style={{ opacity, bottom }} />
+                    <HeroCharacterWrapper>
+                      <HeroCharacter style={{ opacity, bottom }} />
+                    </HeroCharacterWrapper>
                   )}
                 </Spring>
               </HeaderRight>

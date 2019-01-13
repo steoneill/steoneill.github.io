@@ -14,13 +14,21 @@ let NavbarOuter = styled.nav`
   left: 0;
   right: 0;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     width: 100%;
   }
 `
 
-let LogoImage = styled.img`
+let LogoWrapper = styled.object`
+  color: red;
+`
+
+let LogoImage = styled(Logo)`
   max-width: 150px;
+  fill: #fff;
+  @media screen and (min-width: 1024px) {
+    fill: #fa446e;
+  }
 `
 
 export default class Navbar extends Component {
@@ -34,7 +42,9 @@ export default class Navbar extends Component {
         >
           {({ opacity, bottom }) => (
             <Link to={'/'}>
-              <LogoImage style={{ opacity, bottom }} src={Logo} />
+              <LogoWrapper>
+                <LogoImage />
+              </LogoWrapper>
             </Link>
           )}
         </Spring>
