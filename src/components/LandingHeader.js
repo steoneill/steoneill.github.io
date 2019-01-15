@@ -5,43 +5,16 @@ import Navbar from './Navbar'
 import AvailableForWork from './AvailableForWork'
 import { Spring } from 'react-spring'
 import Me from '../images/Me.svg'
-
-let LargeBackgroundShape = styled.div`
+import HeaderShape from '../images/header_Shape.svg'
+let LargeBackgroundShape = styled.object`
   position: absolute;
-  background-image: linear-gradient(100deg, #ff6480, #f22e63);
-  top: -350px;
-  right: -110px;
-  border-radius: 8%;
-  width: 50%;
-  height: 800px;
-  transform: skew(3deg, 30deg);
+  top: 0;
+  right: 0;
   opacity: 1;
   z-index: -1;
-  box-shadow: 0 10px 60px RGBA(228, 30, 134, 0.4);
-  display: none;
 
   @media screen and (min-width: 1024px) {
     display: block;
-  }
-`
-
-let HeroBackground = styled.div`
-  position: absolute;
-  opacity: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-image: none;
-  background-repeat: repeat-x;
-  background-color: #f22e63;
-  background-image: linear-gradient(100deg, #ff6480, #f22e63);
-  transform-origin: top left;
-  transform: skewY(-8deg);
-  z-index: -1;
-
-  @media screen and (min-width: 1024px) {
-    display: none;
   }
 `
 
@@ -88,7 +61,7 @@ let HeaderOuter = styled.header`
   flex-direction: column;
 
   @media screen and (min-width: 1024px) {
-    height: 80vh;
+    height: 90vh;
     flex-direction: row;
     padding-bottom: 120px;
   }
@@ -112,8 +85,8 @@ let HeaderInner = styled.div`
   margin: auto;
   text-align: center;
   display: flex;
-  padding: 15px;
   flex-direction: column;
+  padding: 50px 0;
 
   @media screen and (min-width: 1024px) {
     flex-direction: row;
@@ -150,12 +123,11 @@ let Greeting = styled.h1`
   margin-top: 0;
   font-weight: 700;
   letter-spacing: -2px;
-  color: white;
   font-size: 55px;
   line-height: 45px;
+  color: ${props => props.theme.black};
 
   @media screen and (min-width: 1024px) {
-    color: ${props => props.theme.black};
     font-size: 90px;
     line-height: 80px;
   }
@@ -170,7 +142,6 @@ let HeaderCopy = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: auto;
-    color: white;
   }
 `
 
@@ -187,17 +158,12 @@ let CTA = styled(Link)`
   transition: all 0.2s;
   box-shadow: 0 7px 14px -7px #ff6d88;
   align-self: self-start;
-  background: white;
-  color: ${props => props.theme.primary};
+  color: white;
+  background-image: linear-gradient(100deg, #ff6480, #f22e63);
 
   margin-top: 20px;
   &:hover {
     transform: scale(0.9);
-  }
-
-  @media screen and (min-width: 1024px) {
-    color: white;
-    background-image: linear-gradient(100deg, #ff6480, #f22e63);
   }
 `
 
@@ -223,7 +189,6 @@ export default class LandingHeader extends Component {
         `}
         render={data => (
           <HeaderOuter>
-            <HeroBackground />
             <Spring delay={500} from={{ opacity: 0 }} to={{ opacity: 0.2 }}>
               {({ opacity }) => <HeroCircle1 style={{ opacity }} />}
             </Spring>
@@ -241,7 +206,9 @@ export default class LandingHeader extends Component {
               }}
             >
               {({ opacity, top }) => (
-                <LargeBackgroundShape style={{ opacity, top }} />
+                <LargeBackgroundShape style={{ opacity, top }}>
+                  <HeaderShape />
+                </LargeBackgroundShape>
               )}
             </Spring>
             <Navbar />

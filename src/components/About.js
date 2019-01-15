@@ -2,8 +2,45 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
+import AboutShape from '../images/AboutShape.svg'
 
-let ImageItem = styled(Image)``
+let ImagesOuter = styled.div`
+  display: grid;
+  grid-template-areas:
+  'image-1 .'
+  'image-1 image-2'
+  grid-gap: 25px;
+  transform: rotate(-15deg);
+  left: -200px;
+  position: absolute;
+`
+
+let ImageItem = styled(Image)`
+  border-radius: 5px;
+  box-shadow: ${props => props.theme.bs};
+
+  &.image {
+    &-1 {
+      width: 231px;
+      height: 280px;
+    }
+
+    &-2 {
+      width: 231px;
+      height: 335px;
+    }
+
+    &-3 {
+      width: 231px;
+      height: 344px;
+    }
+
+    &-4 {
+      width: 231px;
+      height: 332px;
+    }
+  }
+`
 
 let AboutOuter = styled.section`
   display: flex;
@@ -22,10 +59,13 @@ let AboutInner = styled.div`
 
   margin-bottom: 120px;
 `
-
-let AboutContent = styled.div``
-
-let AboutImages = styled.div``
+let AboutContent = styled.div`
+  width: 50%;
+`
+let AboutImages = styled.div`
+  width: 50%;
+  position: relative;
+`
 let Wave = styled.svg`
   background: #f4edf5;
   width: 100%;
@@ -40,11 +80,19 @@ let Wave = styled.svg`
 `
 
 let WaveOuter = styled.div`
-  width: 100%;
+  width: auto;
   position: absolute;
   bottom: 0;
   z-index: -1;
 `
+
+let AboutShapeOuter = styled.object`
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+`
+
+let AboutBackground = styled(AboutShape)``
 
 export default class About extends Component {
   render() {
@@ -64,8 +112,8 @@ export default class About extends Component {
               images {
                 id
                 title
-                fixed(width: 450, height: 450, cropFocus: FACES) {
-                  ...GatsbyContentfulFixed
+                fluid {
+                  ...GatsbyContentfulFluid_tracedSVG
                 }
               }
             }
@@ -76,15 +124,20 @@ export default class About extends Component {
             <AboutOuter>
               <AboutInner>
                 <AboutImages>
-                  {/* {data.contentfulAbout.images.map((image, i) => {
-                    return (
-                      <ImageItem
-                        fixed={image.fixed}
-                        className={`image-${i + 1}`}
-                        key={image.id}
-                      />
-                    )
-                  })} */}
+                  <ImagesOuter>
+                    {data.contentfulAbout.images.map((image, i) => {
+                      return (
+                        <ImageItem
+                          fluid={image.fluid}
+                          className={`image-${i + 1}`}
+                          key={image.id}
+                        />
+                      )
+                    })}
+                  </ImagesOuter>
+                  <AboutShapeOuter>
+                    <AboutBackground />
+                  </AboutShapeOuter>
                 </AboutImages>
                 <AboutContent>
                   <h2>{data.contentfulAbout.title}</h2>

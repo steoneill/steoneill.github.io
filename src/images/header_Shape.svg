@@ -1,40 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="639px" height="633px" viewBox="0 0 639 633" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="1383px" height="773px" viewBox="0 0 1383 773" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-    <title>Hero shape</title>
+    <title>Path 5</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <linearGradient x1="100%" y1="100%" x2="0%" y2="0%" id="linearGradient-1">
-            <stop stop-color="#2CBFC7" offset="0%"></stop>
-            <stop stop-color="#46EEAA" offset="100%"></stop>
-        </linearGradient>
-        <path d="M298.568841,195.719762 L879.134508,195.719762 L879.134508,598.711025 L286.555453,598.711025 L286.555453,598.437214 C286.302595,598.437785 286.049645,598.438105 285.796606,598.438105 C151.437181,598.438105 42.5173454,508.225438 42.5173454,396.942474 C42.5173454,285.659509 151.437181,195.446842 285.796606,195.446842 C290.080782,195.446842 294.339093,195.538563 298.568833,195.719762 Z" id="path-2"></path>
-        <path d="M712.899411,473.799203 L424.487117,661.096337 L424.337989,660.8667 C424.126235,661.004895 423.914269,661.14293 423.702052,661.280745 C311.018756,734.458133 170.537556,718.121418 109.92851,624.791671 C49.3194635,531.461924 91.5339835,396.481221 204.217279,323.303833 C207.810292,320.970504 211.431566,318.728185 215.077613,316.57647 L579.37343,80 L712.899411,80 L712.899411,473.799203 Z" id="path-4"></path>
-        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0.18" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-7">
-            <stop stop-color="#FFFFFF" stop-opacity="0.18" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="97.6381864%" id="linearGradient-1">
+            <stop stop-color="#E55DFF" offset="0%"></stop>
+            <stop stop-color="#FF734B" offset="100%"></stop>
         </linearGradient>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Desktop-HD" transform="translate(-801.000000, 0.000000)">
-            <g id="Header-Image" transform="translate(719.000000, -74.000000)">
-                <g id="Hero-shape">
-                    <mask id="mask-3" fill="white">
-                        <use xlink:href="#path-2"></use>
-                    </mask>
-                    <use id="Combined-Shape" fill="url(#linearGradient-1)" fill-rule="nonzero" transform="translate(460.825927, 397.078934) rotate(-33.000000) translate(-460.825927, -397.078934) " xlink:href="#path-2"></use>
-                    <mask id="mask-5" fill="white">
-                        <use xlink:href="#path-4"></use>
-                    </mask>
-                    <use id="Combined-Shape" fill="url(#linearGradient-1)" fill-rule="nonzero" xlink:href="#path-4"></use>
-                    <ellipse id="Oval" fill="url(#linearGradient-6)" fill-rule="nonzero" mask="url(#mask-5)" transform="translate(429.420408, 224.173520) rotate(37.000000) translate(-429.420408, -224.173520) " cx="429.420408" cy="224.17352" rx="82.6510709" ry="82.6360732"></ellipse>
-                    <ellipse id="Oval-Copy" fill="url(#linearGradient-7)" fill-rule="nonzero" mask="url(#mask-5)" cx="601.729637" cy="453.128674" rx="45.1218344" ry="45.0921366"></ellipse>
-                    <ellipse id="Oval-Copy" fill="url(#linearGradient-7)" fill-rule="nonzero" mask="url(#mask-5)" transform="translate(771.461514, 246.483770) rotate(-103.000000) translate(-771.461514, -246.483770) " cx="771.461514" cy="246.48377" rx="82.1218344" ry="82.0921366"></ellipse>
-                </g>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="22_21_Demo_One_Page_Applanding" transform="translate(-537.000000, 0.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="HERO_BANNER" transform="translate(-337.000000, -382.000000)">
+                <path d="M880.016518,350.006035 C858.016725,422.678397 896.349697,509.351856 995.015434,610.026413 C1143.01404,761.038248 1861.00727,1446.09194 2025.00573,1014.05808 C2134.33803,726.035505 2337.00279,479.016146 2633,273 L880.016518,350.006035 Z" id="Path-5"></path>
             </g>
         </g>
     </g>
