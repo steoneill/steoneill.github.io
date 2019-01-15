@@ -6,9 +6,9 @@ import AboutShape from '../images/AboutShape.svg'
 
 let ImagesOuter = styled.div`
   display: grid;
-  grid-template-areas:
-  'image-1 .'
-  'image-1 image-2'
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(17, 1fr);
+
   grid-gap: 25px;
   transform: rotate(-15deg);
   left: -200px;
@@ -23,21 +23,38 @@ let ImageItem = styled(Image)`
     &-1 {
       width: 231px;
       height: 280px;
+
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 6;
     }
 
     &-2 {
       width: 231px;
       height: 335px;
+      grid-column-start: 4;
+      grid-column-end: 8;
+      grid-row-start: 2;
+      grid-row-end: 8;
     }
 
     &-3 {
       width: 231px;
       height: 344px;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 6;
+      grid-row-end: 12;
     }
 
     &-4 {
       width: 231px;
       height: 332px;
+      grid-column-start: 4;
+      grid-column-end: 8;
+      grid-row-start: 8;
+      grid-row-end: 17;
     }
   }
 `
