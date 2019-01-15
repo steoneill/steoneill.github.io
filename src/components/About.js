@@ -9,10 +9,8 @@ let ImagesOuter = styled.div`
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(17, 1fr);
 
-  grid-gap: 25px;
+  grid-gap: 10px;
   transform: rotate(-15deg);
-  left: -200px;
-  position: absolute;
 `
 
 let ImageItem = styled(Image)`
@@ -21,40 +19,31 @@ let ImageItem = styled(Image)`
 
   &.image {
     &-1 {
-      width: 231px;
-      height: 280px;
-
       grid-column-start: 1;
-      grid-column-end: 4;
+      grid-column-end: 5;
       grid-row-start: 1;
       grid-row-end: 6;
     }
 
     &-2 {
-      width: 231px;
-      height: 335px;
-      grid-column-start: 4;
-      grid-column-end: 8;
+      grid-column-start: 5;
+      grid-column-end: 9;
       grid-row-start: 2;
       grid-row-end: 8;
     }
 
     &-3 {
-      width: 231px;
-      height: 344px;
       grid-column-start: 1;
-      grid-column-end: 4;
+      grid-column-end: 5;
       grid-row-start: 6;
       grid-row-end: 12;
     }
 
     &-4 {
-      width: 231px;
-      height: 332px;
-      grid-column-start: 4;
-      grid-column-end: 8;
+      grid-column-start: 5;
+      grid-column-end: 9;
       grid-row-start: 8;
-      grid-row-end: 17;
+      grid-row-end: 14;
     }
   }
 `
