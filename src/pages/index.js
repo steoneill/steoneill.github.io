@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+// import { Link } from 'gatsby'
 import LandingHeader from '../components/LandingHeader'
 
 import Layout from '../components/layout'
@@ -9,6 +9,8 @@ import About from '../components/About'
 const IndexPage = () => (
   <Layout>
     <LandingHeader />
+    {/* <About />
+    <SkillBlocks /> */}
   </Layout>
 )
 

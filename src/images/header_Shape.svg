@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1383px" height="773px" viewBox="0 0 1383 773" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Path 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="97.6381864%" id="linearGradient-1">
+            <stop stop-color="#E55DFF" offset="0%"></stop>
+            <stop stop-color="#FF734B" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="22_21_Demo_One_Page_Applanding" transform="translate(-537.000000, 0.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="HERO_BANNER" transform="translate(-337.000000, -382.000000)">
+                <path d="M880.016518,350.006035 C858.016725,422.678397 896.349697,509.351856 995.015434,610.026413 C1143.01404,761.038248 1861.00727,1446.09194 2025.00573,1014.05808 C2134.33803,726.035505 2337.00279,479.016146 2633,273 L880.016518,350.006035 Z" id="Path-5"></path>
+            </g>
+        </g>
+    </g>
+</svg>

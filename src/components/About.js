@@ -1,23 +1,51 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
+import AboutShape from '../images/AboutShape.svg'
+import { Trail, Spring } from 'react-spring'
+import TickImage from '../images/tick.svg'
+
+let ImagesOuter = styled.div`
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(17, 1fr);
+  grid-gap: 10px;
+  transform: rotate(-15deg);
+`
 
 let ImageItem = styled(Image)`
-  max-width: 300px;
-  max-height: 200px;
   border-radius: 5px;
   box-shadow: ${props => props.theme.bs};
-  margin: 5px;
-  transition: all 0.3s;
-  position: absolute;
-  clear: both;
-  top: 0;
-  left: 0;
 
-  &:hover {
-    transform: scale(1.3);
-    z-index: 999;
+  &.image {
+    &-e048b881-e14c-5796-afec-9f0811d2a0df {
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 6;
+    }
+
+    &-169eae70-7294-51eb-97d4-e172a4564244 {
+      grid-column-start: 4;
+      grid-column-end: 7;
+      grid-row-start: 2;
+      grid-row-end: 8;
+    }
+
+    &-9e4e0634-6313-5aeb-913c-23e96a9c3fc7 {
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 6;
+      grid-row-end: 12;
+    }
+
+    &-c0c028ff-10d5-5ac7-91cb-d44ae59c2b1f {
+      grid-column-start: 4;
+      grid-column-end: 7;
+      grid-row-start: 8;
+      grid-row-end: 14;
+    }
   }
 `
 
@@ -25,42 +53,73 @@ let AboutOuter = styled.section`
   display: flex;
   justify-content: center;
   justify-items: center;
+  position: relative;
+  z-index: 1;
+  height: auto;
+  box-sizing: border-box;
+  flex-direction: row;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     flex-direction: column-reverse;
   }
 `
 
 let AboutInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  display: grid;
-  grid-template-areas: 'content' 'images';
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-  padding: 15px;
+  padding: 90px 15px;
+  margin-bottom: 120px;
+  display: flex;
 
-  @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 'images content';
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    overflow: hidden;
+  }
+`
+let AboutContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
+`
+let AboutImages = styled.div`
+  width: 100%;
+  position: relative;
+
+  @media screen and (min-width: 1024px) {
+    width: 50%;
   }
 `
 
-let AboutContent = styled.div`
-  grid-area: content;
+let AboutTitle = styled.h2``
+
+let AboutCopy = styled.p`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 30px;
+  ul {
+    padding: 20px 40px;
+    li {
+      padding: 10px;
+    }
+  }
 `
 
-let AboutImages = styled.div`
-  grid-area: images;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+let AboutShapeOuter = styled.object`
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  top: 0px;
+  left: -410px;
+
+  @media screen and (max-width: 1024px) {
+    top: -200px;
+  }
 `
+
+let AboutBackground = styled(AboutShape)``
 
 export default class About extends Component {
   render() {
@@ -71,17 +130,15 @@ export default class About extends Component {
             contentfulAbout {
               title
               copy {
-                content {
-                  content {
-                    value
-                  }
+                childMarkdownRemark {
+                  html
                 }
               }
               images {
                 id
                 title
-                fixed(width: 500, height: 400, cropFocus: FACES) {
-                  ...GatsbyContentfulFixed
+                fluid {
+                  ...GatsbyContentfulFluid_tracedSVG
                 }
               }
             }
@@ -92,20 +149,53 @@ export default class About extends Component {
             <AboutOuter>
               <AboutInner>
                 <AboutImages>
-                  {data.contentfulAbout.images.map((image, i) => {
-                    return (
-                      <ImageItem
-                        fixed={image.fixed}
-                        className={`image-${i + 1}`}
-                        key={image.id}
-                      />
-                    )
-                  })}
+                  <ImagesOuter>
+                    <Trail
+                      items={data.contentfulAbout.images}
+                      keys={image => image.id}
+                      from={{
+                        transform: 'translate3d(0,400px,0)',
+                        opacity: 0,
+                      }}
+                      to={{ transform: 'translate3d(0,0px,0)', opacity: 1 }}
+                    >
+                      {image => ({ transform, opacity }) => (
+                        <Fragment>
+                          <ImageItem
+                            fluid={image.fluid}
+                            key={image.id}
+                            className={`image-${image.id}`}
+                            style={{ transform, opacity }}
+                          />
+                        </Fragment>
+                      )}
+                    </Trail>
+                  </ImagesOuter>
+                  <Spring
+                    delay={1500}
+                    from={{ opacity: 0 }}
+                    to={{ opacity: 1 }}
+                  >
+                    {({ opacity }) => (
+                      <AboutShapeOuter style={{ opacity }}>
+                        <AboutBackground />
+                      </AboutShapeOuter>
+                    )}
+                  </Spring>
                 </AboutImages>
-                <AboutContent>
-                  <h2>{data.contentfulAbout.title}</h2>
-                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
-                </AboutContent>
+                <Spring delay={1500} from={{ opacity: 0 }} to={{ opacity: 1 }}>
+                  {({ opacity }) => (
+                    <AboutContent style={{ opacity }}>
+                      <AboutTitle>{data.contentfulAbout.title}</AboutTitle>
+                      <AboutCopy
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            data.contentfulAbout.copy.childMarkdownRemark.html,
+                        }}
+                      />
+                    </AboutContent>
+                  )}
+                </Spring>
               </AboutInner>
             </AboutOuter>
           )

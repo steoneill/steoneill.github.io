@@ -10,7 +10,7 @@ module.exports = {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
-          include: /assets/,
+          include: /images/,
         },
       },
     },
@@ -49,6 +49,7 @@ module.exports = {
         fonts: [
           `Playfair Display`,
           `Montserrat\:300,400,400i,700`, // you can also specify font weights and styles
+          `Poppins\:300,400,400i,700`,
         ],
       },
     },
@@ -64,6 +65,7 @@ module.exports = {
         icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
     },
+    'gatsby-transformer-remark',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
