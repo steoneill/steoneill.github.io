@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
 import AboutShape from '../images/AboutShape.svg'
-import { Trail } from 'react-spring'
+import { Trail, Spring } from 'react-spring'
+import TickImage from '../images/tick.svg'
 
 let ImagesOuter = styled.div`
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(17, 1fr);
-
   grid-gap: 10px;
   transform: rotate(-15deg);
 `
@@ -55,48 +55,68 @@ let AboutOuter = styled.section`
   justify-items: center;
   position: relative;
   z-index: 1;
-  height: 90vh;
+  height: auto;
   box-sizing: border-box;
+  flex-direction: row;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column-reverse;
+  }
 `
 
 let AboutInner = styled.div`
   max-width: ${props => props.theme.maxWidth};
   padding: 90px 15px;
+  margin-bottom: 120px;
   display: flex;
 
-  margin-bottom: 120px;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    overflow: hidden;
+  }
 `
 let AboutContent = styled.div`
-  width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
 `
 let AboutImages = styled.div`
-  width: 50%;
-  position: relative;
-`
-let Wave = styled.svg`
-  background: #f4edf5;
   width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: auto;
+  position: relative;
 
-  path {
-    fill: white;
+  @media screen and (min-width: 1024px) {
+    width: 50%;
   }
 `
 
-let WaveOuter = styled.div`
-  width: auto;
-  position: absolute;
-  bottom: 0;
-  z-index: -1;
+let AboutTitle = styled.h2``
+
+let AboutCopy = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  ul {
+    padding: 20px 40px;
+    li {
+      padding: 10px;
+    }
+  }
 `
 
 let AboutShapeOuter = styled.object`
   width: 100%;
   z-index: -1;
   position: absolute;
+  top: 0px;
+  left: -410px;
+
+  @media screen and (max-width: 1024px) {
+    top: -200px;
+  }
 `
 
 let AboutBackground = styled(AboutShape)``
@@ -110,10 +130,8 @@ export default class About extends Component {
             contentfulAbout {
               title
               copy {
-                content {
-                  content {
-                    value
-                  }
+                childMarkdownRemark {
+                  html
                 }
               }
               images {
@@ -153,24 +171,32 @@ export default class About extends Component {
                       )}
                     </Trail>
                   </ImagesOuter>
-                  <AboutShapeOuter>
-                    <AboutBackground />
-                  </AboutShapeOuter>
+                  <Spring
+                    delay={1500}
+                    from={{ opacity: 0 }}
+                    to={{ opacity: 1 }}
+                  >
+                    {({ opacity }) => (
+                      <AboutShapeOuter style={{ opacity }}>
+                        <AboutBackground />
+                      </AboutShapeOuter>
+                    )}
+                  </Spring>
                 </AboutImages>
-                <AboutContent>
-                  <h2>{data.contentfulAbout.title}</h2>
-                  <p>{data.contentfulAbout.copy.content[0].content[0].value}</p>
-                </AboutContent>
+                <Spring delay={1500} from={{ opacity: 0 }} to={{ opacity: 1 }}>
+                  {({ opacity }) => (
+                    <AboutContent style={{ opacity }}>
+                      <AboutTitle>{data.contentfulAbout.title}</AboutTitle>
+                      <AboutCopy
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            data.contentfulAbout.copy.childMarkdownRemark.html,
+                        }}
+                      />
+                    </AboutContent>
+                  )}
+                </Spring>
               </AboutInner>
-              <WaveOuter>
-                <Wave
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="100%"
-                  viewBox="0 0 3600 248"
-                >
-                  <path d="M3601,31.227S2736.31,201.97,1661,72.2C547.345-62.2,0,32.227,0,32.227V343H3602Z" />
-                </Wave>
-              </WaveOuter>
             </AboutOuter>
           )
         }}

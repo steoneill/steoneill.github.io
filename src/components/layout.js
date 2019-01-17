@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-import AvailableForWork from './AvailableForWork'
-
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 // import Navbar from './Navbar'
 
 let Light = {
   primary: '#F6207C',
-  black: '#3B3D40',
+  black: '#454647',
   maxWidth: '1200px',
-  secondaryFont: `'Montserrat', sans-serif`,
+  primaryFont: `'Montserrat', sans-serif`,
+  secondaryFont: `'Poppins', sans-serif`,
+
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
   bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
   headerBackground: '#ffffff',
@@ -23,7 +23,7 @@ let Global = createGlobalStyle`
     padding: 0;
     margin: 0;
     color: ${Light.black};
-    font-family: ${Light.secondaryFont};
+    font-family: ${Light.primaryFont};
   }
 `
 

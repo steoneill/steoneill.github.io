@@ -34,21 +34,21 @@ let LogoImage = styled(Logo)`
 export default class Navbar extends Component {
   render() {
     return (
-      <NavbarOuter>
-        <Spring
-          delay={1000}
-          from={{ opacity: 0, bottom: '-100px' }}
-          to={{ opacity: 1, bottom: '0' }}
-        >
-          {({ opacity, bottom }) => (
+      <Spring
+        delay={500}
+        from={{ opacity: 0, bottom: '-100px' }}
+        to={{ opacity: 1, bottom: '0' }}
+      >
+        {({ opacity }) => (
+          <NavbarOuter>
             <Link to={'/'}>
               <LogoWrapper>
-                <LogoImage />
+                <LogoImage style={{ opacity }} />
               </LogoWrapper>
             </Link>
-          )}
-        </Spring>
-      </NavbarOuter>
+          </NavbarOuter>
+        )}
+      </Spring>
     )
   }
 }

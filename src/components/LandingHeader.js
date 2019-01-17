@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Navbar from './Navbar'
 import AvailableForWork from './AvailableForWork'
 import { Spring, Trail } from 'react-spring'
@@ -61,7 +61,7 @@ let HeaderOuter = styled.header`
   flex-direction: column;
 
   @media screen and (min-width: 1024px) {
-    height: 90vh;
+    height: 70vh;
     flex-direction: row;
     padding-bottom: 120px;
   }
@@ -86,7 +86,7 @@ let HeaderInner = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  padding: 50px 0;
+  padding: 50px 15px;
 
   @media screen and (min-width: 1024px) {
     flex-direction: row;
@@ -119,7 +119,7 @@ let HeaderRight = styled.div`
 `
 
 let Greeting = styled.h1`
-  font-family: ${props => props.theme.secondaryFont};
+  font-family: ${props => props.theme.primaryFont};
   margin: 0;
   font-weight: 700;
   letter-spacing: -2px;
@@ -150,7 +150,7 @@ let CTA = styled(Link)`
   background: white;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   padding: 16px 40px;
   border-radius: 5px;
@@ -216,7 +216,6 @@ export default class LandingHeader extends Component {
               <Spring delay={1000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
                 {props => {
                   let { opacity } = props
-
                   return (
                     <HeaderLeft style={{ opacity }}>
                       {data.contentfulSitewideContent.availableForWork && (
@@ -240,15 +239,34 @@ export default class LandingHeader extends Component {
                           </Fragment>
                         )}
                       </Trail>
-                      <HeaderCopy
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            data.contentfulHeader.headerCopy.childMarkdownRemark
-                              .html,
-                        }}
-                      />
+                      <Spring
+                        delay={1500}
+                        from={{ opacity: 0 }}
+                        to={{ opacity: 1 }}
+                      >
+                        {({ opacity }) => (
+                          <HeaderCopy
+                            style={{ opacity }}
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                data.contentfulHeader.headerCopy
+                                  .childMarkdownRemark.html,
+                            }}
+                          />
+                        )}
+                      </Spring>
                       {!data.contentfulSitewideContent.underConstruction ? (
-                        <CTA to={'/contact'}>Get in touch</CTA>
+                        <Spring
+                          delay={1500}
+                          from={{ opacity: 0 }}
+                          to={{ opacity: 1 }}
+                        >
+                          {({ opacity }) => (
+                            <CTA to={'/contact'} style={{ opacity }}>
+                              Get in touch
+                            </CTA>
+                          )}
+                        </Spring>
                       ) : (
                         <HeaderCopy>
                           I'm currently working on this website, but in the
@@ -259,7 +277,6 @@ export default class LandingHeader extends Component {
                   )
                 }}
               </Spring>
-
               <HeaderRight>
                 <Spring
                   delay={200}

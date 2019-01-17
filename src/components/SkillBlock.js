@@ -8,20 +8,18 @@ let SkillBlockOuter = styled.div`
   border-radius: 5px;
   position: relative;
   transition: all 0.3s;
+  overflow: hidden;
+  background: white;
 
   &:hover {
     background: ${props => props.theme.primary};
     transform: scale(1.05);
+    color: white;
   }
 `
 
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+let SkillBlockInner = styled.div`
+  padding: 15px;
 `
 
 let Circle1 = styled.div`
@@ -33,10 +31,6 @@ let Circle1 = styled.div`
   left: -100px;
   background: rgba(255, 255, 255, 0.4);
   z-index: 1;
-
-  &:hover {
-    animation: 0.3s ${fadeIn} ease-in;
-  }
 `
 
 let Circle2 = styled.div`
@@ -48,9 +42,6 @@ let Circle2 = styled.div`
   left: -260px;
   background: rgba(255, 255, 255, 0.2);
   z-index: 1;
-  &:hover {
-    animation: 0.7s ${fadeIn} ease-in;
-  }
 `
 
 let Circle3 = styled.div`
@@ -62,16 +53,14 @@ let Circle3 = styled.div`
   left: -325px;
   background: rgba(255, 255, 255, 0.1);
   z-index: 1;
-
-  &:hover {
-    animation: 1s ${fadeIn} ease-in;
-  }
 `
 
 export default class SkillBlock extends Component {
   render() {
     return (
       <SkillBlockOuter>
+        {console.log(this.props)}
+        <SkillBlockInner>{this.props.title}</SkillBlockInner>
         <Circle1 />
         <Circle2 />
         <Circle3 />

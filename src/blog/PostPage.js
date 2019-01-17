@@ -20,9 +20,9 @@ let BlogContent = styled.div`
   background: white;
 `
 
-let BlogImage = styled(Img)`
-  width: 100%;
-`
+// let BlogImage = styled(Img)`
+//   width: 100%;
+// `
 
 let BlogTitle = styled.h1`
   color: white;
