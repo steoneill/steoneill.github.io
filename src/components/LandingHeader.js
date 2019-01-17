@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import Navbar from './Navbar'
 import AvailableForWork from './AvailableForWork'
-import { Spring } from 'react-spring'
+import { Spring, Trail } from 'react-spring'
 import Me from '../images/Me.svg'
 import HeaderShape from '../images/header_Shape.svg'
 let LargeBackgroundShape = styled.object`
@@ -120,7 +120,7 @@ let HeaderRight = styled.div`
 
 let Greeting = styled.h1`
   font-family: ${props => props.theme.secondaryFont};
-  margin-top: 0;
+  margin: 0;
   font-weight: 700;
   letter-spacing: -2px;
   font-size: 55px;
@@ -216,12 +216,30 @@ export default class LandingHeader extends Component {
               <Spring delay={1000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
                 {props => {
                   let { opacity } = props
+
                   return (
                     <HeaderLeft style={{ opacity }}>
                       {data.contentfulSitewideContent.availableForWork && (
                         <AvailableForWork />
                       )}
-                      <Greeting>{data.contentfulHeader.boldText}</Greeting>
+                      <Trail
+                        delay={1000}
+                        items={data.contentfulHeader.boldText.split('/n')}
+                        key={item => item.key}
+                        from={{
+                          transform: 'translate3d(0,100px,0)',
+                          opacity: 0,
+                        }}
+                        to={{ transform: 'translate3d(0,0px,0)', opacity: 1 }}
+                      >
+                        {item => ({ transform, opacity }) => (
+                          <Fragment>
+                            <Greeting style={{ transform, opacity }}>
+                              {item}
+                            </Greeting>
+                          </Fragment>
+                        )}
+                      </Trail>
                       <HeaderCopy
                         dangerouslySetInnerHTML={{
                           __html:

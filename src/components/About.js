@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
 import AboutShape from '../images/AboutShape.svg'
+import { Trail } from 'react-spring'
 
 let ImagesOuter = styled.div`
   display: grid;
@@ -18,30 +19,30 @@ let ImageItem = styled(Image)`
   box-shadow: ${props => props.theme.bs};
 
   &.image {
-    &-1 {
+    &-e048b881-e14c-5796-afec-9f0811d2a0df {
       grid-column-start: 1;
-      grid-column-end: 5;
+      grid-column-end: 4;
       grid-row-start: 1;
       grid-row-end: 6;
     }
 
-    &-2 {
-      grid-column-start: 5;
-      grid-column-end: 9;
+    &-169eae70-7294-51eb-97d4-e172a4564244 {
+      grid-column-start: 4;
+      grid-column-end: 7;
       grid-row-start: 2;
       grid-row-end: 8;
     }
 
-    &-3 {
+    &-9e4e0634-6313-5aeb-913c-23e96a9c3fc7 {
       grid-column-start: 1;
-      grid-column-end: 5;
+      grid-column-end: 4;
       grid-row-start: 6;
       grid-row-end: 12;
     }
 
-    &-4 {
-      grid-column-start: 5;
-      grid-column-end: 9;
+    &-c0c028ff-10d5-5ac7-91cb-d44ae59c2b1f {
+      grid-column-start: 4;
+      grid-column-end: 7;
       grid-row-start: 8;
       grid-row-end: 14;
     }
@@ -131,15 +132,26 @@ export default class About extends Component {
               <AboutInner>
                 <AboutImages>
                   <ImagesOuter>
-                    {data.contentfulAbout.images.map((image, i) => {
-                      return (
-                        <ImageItem
-                          fluid={image.fluid}
-                          className={`image-${i + 1}`}
-                          key={image.id}
-                        />
-                      )
-                    })}
+                    <Trail
+                      items={data.contentfulAbout.images}
+                      keys={image => image.id}
+                      from={{
+                        transform: 'translate3d(0,400px,0)',
+                        opacity: 0,
+                      }}
+                      to={{ transform: 'translate3d(0,0px,0)', opacity: 1 }}
+                    >
+                      {image => ({ transform, opacity }) => (
+                        <Fragment>
+                          <ImageItem
+                            fluid={image.fluid}
+                            key={image.id}
+                            className={`image-${image.id}`}
+                            style={{ transform, opacity }}
+                          />
+                        </Fragment>
+                      )}
+                    </Trail>
                   </ImagesOuter>
                   <AboutShapeOuter>
                     <AboutBackground />
