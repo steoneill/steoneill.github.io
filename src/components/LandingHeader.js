@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Navbar from './Navbar'
 import AvailableForWork from './AvailableForWork'
 import { Spring, Trail } from 'react-spring'
 import Me from '../images/Me.svg'
 import HeaderShape from '../images/header_Shape.svg'
+
+//Delare all styles
+
+// Start of background styles
+
 let LargeBackgroundShape = styled.object`
   position: absolute;
   top: 0;
@@ -53,6 +58,10 @@ let HeroCircle2 = styled.div`
   }
 `
 
+// end of background styles
+
+// start framework styles for content
+
 let HeaderOuter = styled.header`
   width: 100%;
   display: flex;
@@ -65,19 +74,6 @@ let HeaderOuter = styled.header`
     flex-direction: row;
     padding-bottom: 120px;
   }
-`
-
-let HeroCharacter = styled(Me)`
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  @media screen and (max-width: 1024px) {
-    position: relative;
-  }
-`
-
-let HeroCharacterWrapper = styled.object`
-  width: 50%;
 `
 
 let HeaderInner = styled.div`
@@ -108,16 +104,6 @@ let HeaderLeft = styled.div`
   }
 `
 
-let HeaderRight = styled.div`
-  position: relative;
-  width: 100%;
-  @media screen and (min-width: 1024px) {
-    width: 50%;
-    background: none;
-    display: flex;
-  }
-`
-
 let Greeting = styled.h1`
   font-family: ${props => props.theme.primaryFont};
   margin: 0;
@@ -136,7 +122,7 @@ let Greeting = styled.h1`
 let HeaderCopy = styled.div`
   font-size: 20px;
   line-height: 26px;
-  font-weight: 400;
+  font-weight: 200;
   color: ${props => props.theme.black};
   font-family: ${props => props.theme.secondaryFont};
 
@@ -166,6 +152,31 @@ let CTA = styled(Link)`
     transform: scale(0.9);
   }
 `
+
+let HeaderRight = styled.div`
+  position: relative;
+  width: 100%;
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+    background: none;
+    display: flex;
+  }
+`
+
+let HeroCharacter = styled(Me)`
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  @media screen and (max-width: 1024px) {
+    position: relative;
+  }
+`
+
+let HeroCharacterWrapper = styled.object`
+  width: 50%;
+`
+
+//end framework styles and all declarations
 
 export default class LandingHeader extends Component {
   render() {
@@ -232,11 +243,9 @@ export default class LandingHeader extends Component {
                         to={{ transform: 'translate3d(0,0px,0)', opacity: 1 }}
                       >
                         {item => ({ transform, opacity }) => (
-                          <Fragment>
-                            <Greeting style={{ transform, opacity }}>
-                              {item}
-                            </Greeting>
-                          </Fragment>
+                          <Greeting style={{ transform, opacity }}>
+                            <span style={{ transform, opacity }}>{item}</span>
+                          </Greeting>
                         )}
                       </Trail>
                       <Spring
@@ -245,17 +254,27 @@ export default class LandingHeader extends Component {
                         to={{ opacity: 1 }}
                       >
                         {({ opacity }) => (
-                          <HeaderCopy
-                            style={{ opacity }}
-                            dangerouslySetInnerHTML={{
-                              __html:
-                                data.contentfulHeader.headerCopy
-                                  .childMarkdownRemark.html,
-                            }}
-                          />
+                          <Fragment>
+                            <HeaderCopy
+                              style={{ opacity }}
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  data.contentfulHeader.headerCopy
+                                    .childMarkdownRemark.html,
+                              }}
+                            />
+                            {!data.contentfulSitewideContent
+                              .underConstruction && (
+                              <HeaderCopy style={{ opacity }}>
+                                I'm currently working on this website, but in
+                                the background IT'S GETTING THERE! So, check
+                                back soon!
+                              </HeaderCopy>
+                            )}
+                          </Fragment>
                         )}
                       </Spring>
-                      {!data.contentfulSitewideContent.underConstruction ? (
+                      {this.props.location !== 'contact' && (
                         <Spring
                           delay={1500}
                           from={{ opacity: 0 }}
@@ -267,11 +286,6 @@ export default class LandingHeader extends Component {
                             </CTA>
                           )}
                         </Spring>
-                      ) : (
-                        <HeaderCopy>
-                          I'm currently working on this website, but in the
-                          background IT'S GETTING THERE! So, check back soon!
-                        </HeaderCopy>
                       )}
                     </HeaderLeft>
                   )

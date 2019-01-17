@@ -9,8 +9,8 @@ import About from '../components/About'
 const IndexPage = () => (
   <Layout>
     <LandingHeader />
-    <About />
-    <SkillBlocks />
+    {/* <About />
+    <SkillBlocks /> */}
   </Layout>
 )
 
