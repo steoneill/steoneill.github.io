@@ -1,5 +1,6 @@
 const path = require('path')
 
+//the framework for creating pages based on the contentful blog post type.. unneeded for now. Would like to turn to async/await when needed.
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {

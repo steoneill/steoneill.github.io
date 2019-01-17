@@ -227,6 +227,7 @@ export default class LandingHeader extends Component {
               <Spring delay={1000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
                 {props => {
                   let { opacity } = props
+                  let contactHeader = ['Getting in touch', 'for a new site?']
                   return (
                     <HeaderLeft style={{ opacity }}>
                       {data.contentfulSitewideContent.availableForWork && (
@@ -234,7 +235,11 @@ export default class LandingHeader extends Component {
                       )}
                       <Trail
                         delay={1000}
-                        items={data.contentfulHeader.boldText.split('/n')}
+                        items={
+                          this.props.location !== 'contact'
+                            ? data.contentfulHeader.boldText.split('/n')
+                            : contactHeader
+                        }
                         key={item => item.key}
                         from={{
                           transform: 'translate3d(0,100px,0)',
@@ -274,7 +279,7 @@ export default class LandingHeader extends Component {
                           </Fragment>
                         )}
                       </Spring>
-                      {this.props.location !== 'contact' && (
+                      {/* {this.props.location !== 'contact' && (
                         <Spring
                           delay={1500}
                           from={{ opacity: 0 }}
@@ -286,7 +291,7 @@ export default class LandingHeader extends Component {
                             </CTA>
                           )}
                         </Spring>
-                      )}
+                      )} */}
                     </HeaderLeft>
                   )
                 }}
