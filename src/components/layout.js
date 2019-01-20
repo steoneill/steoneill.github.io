@@ -8,11 +8,11 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 let Light = {
   primary: '#F6207C',
-  black: '#454647',
+  black: '#253D5F',
   maxWidth: '1200px',
   primaryFont: `'Montserrat', sans-serif`,
   secondaryFont: `'Poppins', sans-serif`,
-
+  gradient: 'linear-gradient(100deg, #ff6480, #f22e63)',
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
   bsPink: '0 12px 24px 0 RGBA(246, 32, 124, 100)',
   headerBackground: '#ffffff',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logo from '../images/logo.svg'
+import Logo from '../images/svg/logo.svg'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { Spring } from 'react-spring'
@@ -19,9 +19,9 @@ let NavbarOuter = styled.nav`
   }
 `
 
-let LogoWrapper = styled.object`
-  color: red;
-`
+let MenuItems = styled.menu``
+
+let LogoWrapper = styled.object``
 
 let LogoImage = styled(Logo)`
   max-width: 150px;
@@ -44,6 +44,7 @@ export default class Navbar extends Component {
             <Link to={'/'}>
               <LogoWrapper>
                 <LogoImage style={{ opacity }} />
+                <MenuItems />
               </LogoWrapper>
             </Link>
           </NavbarOuter>

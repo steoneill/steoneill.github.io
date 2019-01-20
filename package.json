@@ -24,6 +24,7 @@
     "gatsby-transformer-remark": "^2.1.1-rc.5",
     "gatsby-transformer-sharp": "^2.1.4",
     "netlify-cms": "^2.2.0",
+    "prop-types": "^15.6.2",
     "react": "^16.5.1",
     "react-anime": "^2.2.0",
     "react-dom": "^16.5.1",
@@ -31,7 +32,8 @@
     "react-pose": "^4.0.1",
     "react-spring": "^7.2.8",
     "react-typekit": "^1.1.4",
-    "styled-components": "^4.1.1"
+    "styled-components": "^4.1.1",
+    "typeface-montserrat": "0.0.54"
   },
   "keywords": [
     "gatsby"

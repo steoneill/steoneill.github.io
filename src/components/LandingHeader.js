@@ -4,61 +4,12 @@ import styled from 'styled-components'
 import Navbar from './Navbar'
 import AvailableForWork from './AvailableForWork'
 import { Spring, Trail } from 'react-spring'
-import Me from '../images/Me.svg'
-import HeaderShape from '../images/header_Shape.svg'
+import Me from '../images/svg/Me.svg'
+import HeaderBackground from '../images/png/Header_BG.png'
 
 //Delare all styles
 
 // Start of background styles
-
-let LargeBackgroundShape = styled.object`
-  position: absolute;
-  top: 0;
-  right: 0;
-  opacity: 1;
-  z-index: -1;
-
-  @media screen and (min-width: 1024px) {
-    display: block;
-  }
-`
-
-let HeroCircle1 = styled.div`
-  position: absolute;
-  background-color: #009efd;
-  background-image: linear-gradient(100deg, #2af598, #009efd);
-  top: -250px;
-  left: -250px;
-  border-radius: 100%;
-  height: 500px;
-  width: 500px;
-  opacity: 0.2;
-  z-index: -1;
-  display: none;
-
-  @media screen and (min-width: 1024px) {
-    display: block;
-  }
-`
-
-let HeroCircle2 = styled.div`
-  position: absolute;
-  background-color: #f22e63;
-  background-image: linear-gradient(100deg, #ff6480, #f22e63);
-  width: 80px;
-  height: 80px;
-  z-index: -1;
-  top: 150px;
-  left: 120px;
-  border-radius: 50%;
-  display: none;
-
-  @media screen and (min-width: 1024px) {
-    display: block;
-  }
-`
-
-// end of background styles
 
 // start framework styles for content
 
@@ -68,9 +19,11 @@ let HeaderOuter = styled.header`
   height: auto;
   position: relative;
   flex-direction: column;
+  background-image: url(${HeaderBackground});
+  background-size: cover;
 
   @media screen and (min-width: 1024px) {
-    height: 70vh;
+    height: 90vh;
     flex-direction: row;
     padding-bottom: 120px;
   }
@@ -120,11 +73,12 @@ let Greeting = styled.h1`
 `
 
 let HeaderCopy = styled.div`
-  font-size: 20px;
+  font-size: 22px;
   line-height: 26px;
   font-weight: 200;
-  color: ${props => props.theme.black};
+  color: #4a505e;
   font-family: ${props => props.theme.secondaryFont};
+  padding: 58px 0px;
 
   @media screen and (max-width: 1024px) {
     width: auto;
@@ -200,34 +154,11 @@ export default class LandingHeader extends Component {
         `}
         render={data => (
           <HeaderOuter>
-            <Spring delay={500} from={{ opacity: 0 }} to={{ opacity: 0.2 }}>
-              {({ opacity }) => <HeroCircle1 style={{ opacity }} />}
-            </Spring>
-            <Spring delay={800} from={{ opacity: 0 }} to={{ opacity: 0.8 }}>
-              {({ opacity }) => <HeroCircle2 style={{ opacity }} />}
-            </Spring>
-            <Spring
-              from={{
-                opacity: 0,
-                top: -650,
-              }}
-              to={{
-                opacity: 1,
-                top: -350,
-              }}
-            >
-              {({ opacity, top }) => (
-                <LargeBackgroundShape style={{ opacity, top }}>
-                  <HeaderShape />
-                </LargeBackgroundShape>
-              )}
-            </Spring>
             <Navbar />
             <HeaderInner>
               <Spring delay={1000} from={{ opacity: 0 }} to={{ opacity: 1 }}>
                 {props => {
                   let { opacity } = props
-                  let contactHeader = ['Getting in touch', 'for a new site?']
                   return (
                     <HeaderLeft style={{ opacity }}>
                       {data.contentfulSitewideContent.availableForWork && (
@@ -235,11 +166,7 @@ export default class LandingHeader extends Component {
                       )}
                       <Trail
                         delay={1000}
-                        items={
-                          this.props.location !== 'contact'
-                            ? data.contentfulHeader.boldText.split('/n')
-                            : contactHeader
-                        }
+                        items={data.contentfulHeader.boldText.split('/n')}
                         key={item => item.key}
                         from={{
                           transform: 'translate3d(0,100px,0)',
@@ -268,30 +195,21 @@ export default class LandingHeader extends Component {
                                     .childMarkdownRemark.html,
                               }}
                             />
-                            {!data.contentfulSitewideContent
-                              .underConstruction && (
-                              <HeaderCopy style={{ opacity }}>
-                                I'm currently working on this website, but in
-                                the background IT'S GETTING THERE! So, check
-                                back soon!
-                              </HeaderCopy>
-                            )}
                           </Fragment>
                         )}
                       </Spring>
-                      {/* {this.props.location !== 'contact' && (
-                        <Spring
-                          delay={1500}
-                          from={{ opacity: 0 }}
-                          to={{ opacity: 1 }}
-                        >
-                          {({ opacity }) => (
-                            <CTA to={'/contact'} style={{ opacity }}>
-                              Get in touch
-                            </CTA>
-                          )}
-                        </Spring>
-                      )} */}
+
+                      <Spring
+                        delay={1500}
+                        from={{ opacity: 0 }}
+                        to={{ opacity: 1 }}
+                      >
+                        {({ opacity }) => (
+                          <CTA to={'/contact'} style={{ opacity }}>
+                            Get in touch
+                          </CTA>
+                        )}
+                      </Spring>
                     </HeaderLeft>
                   )
                 }}
